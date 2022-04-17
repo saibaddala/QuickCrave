@@ -60,10 +60,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-         const Expanded(
-              child: SingleChildScrollView(
-            child: const HomeScreenItemsBuilder(),
-          ))
+          const Expanded(
+            child: SingleChildScrollView(
+              child: HomeScreenItemsBuilder(),
+            ),
+          )
         ],
       ),
     );
