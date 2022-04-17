@@ -5,8 +5,8 @@ import 'package:foodart/reusable_widgets/name_review_geographics_widget.dart';
 import 'package:foodart/utilities/colors.dart';
 import 'package:foodart/utilities/dimensions.dart';
 
-class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({Key? key}) : super(key: key);
+class PopularFoodDetailScreen extends StatelessWidget {
+  const PopularFoodDetailScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,7 @@ class PopularFoodDetail extends StatelessWidget {
       bottomNavigationBar: Container(
         padding: EdgeInsets.only(
             left: Dimensions.width25, right: Dimensions.width25),
-        height: Dimensions.height80,
+        height: Dimensions.height100,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimensions.radius20),
           color: AppColors.buttonBackgroundColor,
@@ -104,7 +104,7 @@ class PopularFoodDetail extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              height: Dimensions.height40,
+              height: Dimensions.height50,
               width: Dimensions.width100,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius15),
@@ -126,7 +126,7 @@ class PopularFoodDetail extends StatelessWidget {
             ),
             Container(
               alignment: Alignment.center,
-              height: Dimensions.height40,
+              height: Dimensions.height50,
               width: Dimensions.width180,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius15),
