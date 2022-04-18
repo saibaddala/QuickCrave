@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodart/backend/popular_product_model.dart';
 import 'package:foodart/reusable_widgets/big_text.dart';
 import 'package:foodart/reusable_widgets/icon_and_text_widget.dart';
 import 'package:foodart/reusable_widgets/small_text.dart';
@@ -8,12 +9,15 @@ import 'package:foodart/utilities/dimensions.dart';
 class NameAndReviewAndGeographicsWidget extends StatelessWidget {
   final double iconSize;
   final double textSize;
-
-  const NameAndReviewAndGeographicsWidget({
+   ProductModel? popularProducts;
+  NameAndReviewAndGeographicsWidget({
     Key? key,
+    ProductModel? popularProduct,
     this.iconSize = 25,
     this.textSize = 15,
-  }) : super(key: key);
+  }) : super(key: key) {
+    popularProducts = popularProduct;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,7 @@ class NameAndReviewAndGeographicsWidget extends StatelessWidget {
         top: Dimensions.height15,
       ),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const BigText(text: "Bitter Orange Marianade"),
+        BigText(text: popularProducts!.name!.isNotEmpty?popularProducts!.name!:"No data"),
         SizedBox(
           height: Dimensions.height5,
         ),
@@ -42,7 +46,7 @@ class NameAndReviewAndGeographicsWidget extends StatelessWidget {
             SizedBox(
               width: Dimensions.width5,
             ),
-            const SmallText(text: "4.5"),
+            SmallText(text: popularProducts!=null?popularProducts!.stars!.toString():"No data"),
             SizedBox(
               width: Dimensions.width10,
             ),

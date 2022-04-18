@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:foodart/backend/popular_product_controller.dart';
 import 'package:foodart/builders/home_screen_items_builder.dart';
 import 'package:foodart/reusable_widgets/big_text.dart';
 import 'package:foodart/reusable_widgets/small_text.dart';
 import 'package:foodart/utilities/dimensions.dart';
+import 'package:get/get.dart';
 
+import '../backend/recommended_product_controller.dart';
 import '../utilities/colors.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,6 +19,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    Get.find<PopularProductController>().getPopularProductList();
+    Get.find<RecommendedProductController>().getRecommendedProductList();
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

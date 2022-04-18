@@ -1,9 +1,14 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:foodart/backend/app_constants.dart';
+import 'package:foodart/backend/popular_product_controller.dart';
+import 'package:foodart/backend/popular_product_model.dart';
+import 'package:foodart/backend/recommended_product_controller.dart';
 import 'package:foodart/reusable_widgets/big_text.dart';
 import 'package:foodart/reusable_widgets/name_review_geographics_widget.dart';
 import 'package:foodart/reusable_widgets/small_text.dart';
 import 'package:foodart/utilities/dimensions.dart';
+import 'package:get/get.dart';
 import '../reusable_widgets/icon_and_text_widget.dart';
 import '../utilities/colors.dart';
 
@@ -38,27 +43,49 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          margin: EdgeInsets.only(top: Dimensions.height20),
-          height: Dimensions.height320,
-          child: PageView.builder(
-            controller: pageController,
-            itemCount: 5,
-            itemBuilder: (context, index) => _buildPageViewItem(index),
-          ),
-        ),
-        DotsIndicator(
-          dotsCount: 5,
-          position: currentPageValue,
-          decorator: DotsDecorator(
-            size: const Size.square(9.0),
-            activeSize: const Size(18.0, 9.0),
-            activeShape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5.0),
-            ),
-            activeColor: AppColors.mainColor,
-          ),
-        ),
+        GetBuilder<PopularProductController>(
+            builder: (popularproductcontroller) {
+          return popularproductcontroller.isLoaded
+              ? Container(
+                  margin: EdgeInsets.only(top: Dimensions.height20),
+                  height: Dimensions.height320,
+                  child: PageView.builder(
+                    controller: pageController,
+                    itemCount: popularproductcontroller
+                        .popularProductListgetter.length,
+                    itemBuilder: (context, index) => _buildPageViewItem(
+                        index,
+                        popularproductcontroller
+                            .popularProductListgetter[index]),
+                  ),
+                )
+              : Container(
+                  margin: EdgeInsets.only(top: Dimensions.height20),
+                  height: Dimensions.height320,
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.mainColor,
+                    ),
+                  ),
+                );
+        }),
+        GetBuilder<PopularProductController>(
+            builder: (popularproductcontroller) {
+          return DotsIndicator(
+              dotsCount: popularproductcontroller
+                      .popularProductListgetter.isEmpty
+                  ? 1
+                  : popularproductcontroller.popularProductListgetter.length,
+              position: currentPageValue,
+              decorator: DotsDecorator(
+                size: const Size.square(9.0),
+                activeSize: const Size(18.0, 9.0),
+                activeShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                activeColor: AppColors.mainColor,
+              ));
+        }),
         SizedBox(
           height: Dimensions.height10,
         ),
@@ -68,7 +95,7 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 BigText(
-                  text: "Popular",
+                  text: "Recommended",
                   textColor: AppColors.mainBlackColor,
                 ),
               ]),
@@ -76,16 +103,28 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
         SizedBox(
           height: Dimensions.height5,
         ),
-        ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 15,
-            itemBuilder: ((context, index) => buildListViewItem(index))),
+        GetBuilder<RecommendedProductController>(
+            builder: (recommendedProductController) {
+          return recommendedProductController.isLoaded
+              ? ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: recommendedProductController
+                      .RecommendedProductListgetter.length,
+                  itemBuilder: ((context, index) => buildListViewItem(
+                        index,
+                        recommendedProductController
+                            .RecommendedProductListgetter[index],
+                      )))
+              : CircularProgressIndicator(
+                  color: AppColors.mainColor,
+                );
+        })
       ],
     );
   }
 
-  Widget _buildPageViewItem(int index) {
+  Widget _buildPageViewItem(int index, ProductModel popularProduct) {
     Matrix4 matrix = Matrix4.identity();
     if (index == currentPageValue.floor()) {
       var currentScaling = 1 - (currentPageValue - index) * (1 - scalingFactor);
@@ -120,8 +159,9 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
                 left: Dimensions.width5, right: Dimensions.width5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(Dimensions.radius35),
-              image: const DecorationImage(
-                image: AssetImage("assets/images/food0.png"),
+              image: DecorationImage(
+                image: NetworkImage(
+                    AppConstants.baseUrl + "/uploads/" + popularProduct.img!),
                 fit: BoxFit.cover,
               ),
             ),
@@ -154,7 +194,9 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
                       offset: Offset(5, 0),
                     ),
                   ]),
-              child: const NameAndReviewAndGeographicsWidget(),
+              child: NameAndReviewAndGeographicsWidget(
+                popularProduct: popularProduct,
+              ),
             ),
           )
         ],
@@ -162,7 +204,7 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
     );
   }
 
-  Widget buildListViewItem(int index) {
+  Widget buildListViewItem(int index, ProductModel recommendedProduct) {
     return Container(
       margin: EdgeInsets.only(
         bottom: Dimensions.height10,
@@ -176,10 +218,10 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
             width: Dimensions.width130,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(Dimensions.radius20),
-              image: const DecorationImage(
-                image: AssetImage(
-                  "assets/images/food0.png",
-                ),
+              image: DecorationImage(
+                image: NetworkImage(AppConstants.baseUrl +
+                    "/uploads/" +
+                    recommendedProduct.img!),
                 fit: BoxFit.cover,
               ),
             ),
@@ -202,7 +244,7 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       BigText(
-                        text: "Nutritious Meal By Foodart on Bakers adda",
+                        text: recommendedProduct.name!,
                         wantOverflow: true,
                         textSize: Dimensions.fontSize17,
                       ),
@@ -246,7 +288,7 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
                         ],
                       )
                     ],
-                  )),
+                  ),),
             ),
           )
         ],

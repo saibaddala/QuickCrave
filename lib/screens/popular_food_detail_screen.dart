@@ -71,7 +71,7 @@ class PopularFoodDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const NameAndReviewAndGeographicsWidget(),
+                   NameAndReviewAndGeographicsWidget(),
                   Padding(
                     padding: EdgeInsets.only(
                         left: Dimensions.width15,
