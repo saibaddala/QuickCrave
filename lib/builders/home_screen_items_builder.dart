@@ -7,9 +7,11 @@ import 'package:foodart/backend/recommended_product_controller.dart';
 import 'package:foodart/reusable_widgets/big_text.dart';
 import 'package:foodart/reusable_widgets/name_review_geographics_widget.dart';
 import 'package:foodart/reusable_widgets/small_text.dart';
+import 'package:foodart/screens/popular_food_detail_screen.dart';
 import 'package:foodart/utilities/dimensions.dart';
 import 'package:get/get.dart';
 import '../reusable_widgets/icon_and_text_widget.dart';
+import '../route_helper.dart';
 import '../utilities/colors.dart';
 
 class HomeScreenItemsBuilder extends StatefulWidget {
@@ -125,6 +127,7 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
   }
 
   Widget _buildPageViewItem(int index, ProductModel popularProduct) {
+    var controller = Get.find<PopularProductController>();
     Matrix4 matrix = Matrix4.identity();
     if (index == currentPageValue.floor()) {
       var currentScaling = 1 - (currentPageValue - index) * (1 - scalingFactor);
@@ -151,91 +154,100 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
 
     return Transform(
       transform: matrix,
-      child: Stack(
-        children: [
-          Container(
-            height: Dimensions.height220,
-            margin: EdgeInsets.only(
-                left: Dimensions.width5, right: Dimensions.width5),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.radius35),
-              image: DecorationImage(
-                image: NetworkImage(
-                    AppConstants.baseUrl + "/uploads/" + popularProduct.img!),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
+      child: GestureDetector(
+        onTap: () {
+          Get.toNamed(RouteHelper.getPopularFoodPage(index,"home"));
+        },
+        child: Stack(
+          children: [
+            Container(
+              height: Dimensions.height220,
               margin: EdgeInsets.only(
-                left: Dimensions.width30,
-                right: Dimensions.width30,
-                bottom: Dimensions.height15,
-              ),
-              height: Dimensions.height130,
+                  left: Dimensions.width5, right: Dimensions.width5),
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(
-                    Dimensions.radius40,
-                  ),
-                  boxShadow: const [
-                    BoxShadow(
-                        color: Color(0xFFe8e8e8),
-                        blurRadius: 5.0,
-                        offset: Offset(0, 5)),
-                    BoxShadow(
-                      color: Colors.white,
-                      offset: Offset(-5, 0),
-                    ),
-                    BoxShadow(
-                      color: Colors.white,
-                      offset: Offset(5, 0),
-                    ),
-                  ]),
-              child: NameAndReviewAndGeographicsWidget(
-                popularProduct: popularProduct,
+                borderRadius: BorderRadius.circular(Dimensions.radius35),
+                image: DecorationImage(
+                  image: NetworkImage(
+                      AppConstants.baseUrl + "/uploads/" + popularProduct.img!),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          )
-        ],
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                margin: EdgeInsets.only(
+                  left: Dimensions.width30,
+                  right: Dimensions.width30,
+                  bottom: Dimensions.height15,
+                ),
+                height: Dimensions.height130,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(
+                      Dimensions.radius40,
+                    ),
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Color(0xFFe8e8e8),
+                          blurRadius: 5.0,
+                          offset: Offset(0, 5)),
+                      BoxShadow(
+                        color: Colors.white,
+                        offset: Offset(-5, 0),
+                      ),
+                      BoxShadow(
+                        color: Colors.white,
+                        offset: Offset(5, 0),
+                      ),
+                    ]),
+                child: NameAndReviewAndGeographicsWidget(
+                  popularProduct: popularProduct,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 
   Widget buildListViewItem(int index, ProductModel recommendedProduct) {
-    return Container(
-      margin: EdgeInsets.only(
-        bottom: Dimensions.height10,
-        left: Dimensions.width15,
-        right: Dimensions.width15,
-      ),
-      child: Row(
-        children: [
-          Container(
-            height: Dimensions.height130,
-            width: Dimensions.width130,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.radius20),
-              image: DecorationImage(
-                image: NetworkImage(AppConstants.baseUrl +
-                    "/uploads/" +
-                    recommendedProduct.img!),
-                fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed(RouteHelper.getRecommendedFoodPage(index,"homepage"));
+      },
+      child: Container(
+        margin: EdgeInsets.only(
+          bottom: Dimensions.height10,
+          left: Dimensions.width15,
+          right: Dimensions.width15,
+        ),
+        child: Row(
+          children: [
+            Container(
+              height: Dimensions.height130,
+              width: Dimensions.width130,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.radius20),
+                image: DecorationImage(
+                  image: NetworkImage(AppConstants.baseUrl +
+                      "/uploads/" +
+                      recommendedProduct.img!),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: Container(
-              height: Dimensions.height120,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(Dimensions.radius20),
-                    bottomRight: Radius.circular(Dimensions.radius20)),
-              ),
+            Expanded(
               child: Container(
+                height: Dimensions.height120,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(Dimensions.radius20),
+                      bottomRight: Radius.circular(Dimensions.radius20)),
+                ),
+                child: Container(
                   margin: EdgeInsets.only(
                       left: Dimensions.width10,
                       right: Dimensions.width5,
@@ -248,7 +260,10 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
                         wantOverflow: true,
                         textSize: Dimensions.fontSize17,
                       ),
-                      const SmallText(text: "With Chinese Flavour"),
+                      SmallText(
+                        text: recommendedProduct.description!.toString(),
+                        wantOverflow: true,
+                      ),
                       SizedBox(
                         height: Dimensions.height10,
                       ),
@@ -288,10 +303,12 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
                         ],
                       )
                     ],
-                  ),),
-            ),
-          )
-        ],
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

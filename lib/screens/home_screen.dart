@@ -19,8 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    Get.find<PopularProductController>().getPopularProductList();
-    Get.find<RecommendedProductController>().getRecommendedProductList();
+   
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -28,7 +28,7 @@ class NameAndReviewAndGeographicsWidget extends StatelessWidget {
         top: Dimensions.height15,
       ),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        BigText(text: popularProducts!.name!.isNotEmpty?popularProducts!.name!:"No data"),
+        BigText(text: popularProducts!=null?popularProducts!.name!:"No data"),
         SizedBox(
           height: Dimensions.height5,
         ),
