@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:foodart/backend/controllers/cart_controller.dart';
-import 'package:foodart/backend/controllers/cart_managing_controller.dart';
 import 'package:foodart/backend/controllers/popular_product_controller.dart';
 import 'package:foodart/backend/controllers/recommended_product_controller.dart';
 import 'package:foodart/reusable_widgets/big_text.dart';

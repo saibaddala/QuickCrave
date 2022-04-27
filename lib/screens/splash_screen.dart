@@ -4,7 +4,6 @@ import 'package:foodart/backend/controllers/popular_product_controller.dart';
 import 'package:foodart/utilities/route_helper.dart';
 import 'package:foodart/utilities/dimensions.dart';
 import 'package:get/get.dart';
-import '../backend/controllers/cart_managing_controller.dart';
 import '../backend/controllers/recommended_product_controller.dart';
 
 class SplashScreen extends StatefulWidget {

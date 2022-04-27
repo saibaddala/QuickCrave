@@ -166,6 +166,7 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
                   left: Dimensions.width5, right: Dimensions.width5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius35),
+                color: AppColors.mainColor,
                 image: DecorationImage(
                   image: NetworkImage(
                       AppConstants.baseUrl + "/uploads/" + popularProduct.img!),
@@ -230,6 +231,7 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
               width: Dimensions.width130,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius20),
+                color: AppColors.mainColor,
                 image: DecorationImage(
                   image: NetworkImage(AppConstants.baseUrl +
                       "/uploads/" +
