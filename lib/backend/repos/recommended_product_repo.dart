@@ -7,7 +7,7 @@ class RecommendedProductRepo extends GetxService {
 
   RecommendedProductRepo({required this.apiClient});
 
-  Future<Response> getRecommendedProductListFromApi() async {
+  Future<Response> fetchRecommendedProductListFromApi() async {
     return apiClient.getData(AppConstants.recommendedProductUri);
   }
 }

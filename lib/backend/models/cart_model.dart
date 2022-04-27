@@ -1,6 +1,5 @@
 import 'dart:core';
-
-import 'package:foodart/backend/popular_product_model.dart';
+import 'package:foodart/backend/models/product_model.dart';
 
 class CartModel {
   int? id;

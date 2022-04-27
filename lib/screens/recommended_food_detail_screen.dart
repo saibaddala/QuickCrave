@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:foodart/backend/recommended_product_controller.dart';
+import 'package:foodart/backend/controllers/recommended_product_controller.dart';
 import 'package:foodart/reusable_widgets/big_text.dart';
 import 'package:foodart/reusable_widgets/expandable_text_widget.dart';
-import 'package:foodart/screens/cart_page.dart';
 import 'package:foodart/utilities/colors.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import '../backend/app_constants.dart';
-import '../backend/popular_product_controller.dart';
-import '../route_helper.dart';
+import '../backend/controllers/cart_managing_controller.dart';
+import '../utilities/route_helper.dart';
 import '../utilities/dimensions.dart';
 
 class RecommendedFoodDetailScreen extends StatelessWidget {
   final int listItemIndex;
   final String page;
+
   const RecommendedFoodDetailScreen(
       {Key? key, required this.listItemIndex, required this.page})
       : super(key: key);
@@ -22,9 +20,11 @@ class RecommendedFoodDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var productModel = Get.find<RecommendedProductController>()
-        .RecommendedProductListgetter[listItemIndex];
-    var controller = Get.find<PopularProductController>();
+        .recommendedProductListgetter[listItemIndex];
+    var controller = Get.find<CartManagingController>();
+
     controller.checkQuantity(productModel);
+
     return Scaffold(
         body: CustomScrollView(slivers: [
           SliverAppBar(
@@ -36,10 +36,8 @@ class RecommendedFoodDetailScreen extends StatelessWidget {
                     onTap: () {
                       if (page == "cartpage") {
                         Get.toNamed(RouteHelper.getCartPage());
-                      }
-                      else{
-
-                      Get.toNamed(RouteHelper.getHomeScreen());
+                      } else {
+                        Get.toNamed(RouteHelper.getMainPage());
                       }
                     },
                     child: Container(
@@ -56,7 +54,7 @@ class RecommendedFoodDetailScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  GetBuilder<PopularProductController>(
+                  GetBuilder<CartManagingController>(
                       builder: ((popularController) {
                     return GestureDetector(
                       onTap: () {
@@ -66,9 +64,11 @@ class RecommendedFoodDetailScreen extends StatelessWidget {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                                color: const Color(0xFFfcf4e4),
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.radius20)),
+                              color: const Color(0xFFfcf4e4),
+                              borderRadius: BorderRadius.circular(
+                                Dimensions.radius20,
+                              ),
+                            ),
                             height: Dimensions.height30,
                             width: Dimensions.width30,
                             child: Icon(
@@ -82,16 +82,21 @@ class RecommendedFoodDetailScreen extends StatelessWidget {
                                   right: 3,
                                   top: 2,
                                   child: Container(
-                                    height: 15,
-                                    width: 15,
+                                    height: Dimensions.height15,
+                                    width: Dimensions.width15,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: AppColors.mainColor),
+                                      borderRadius: BorderRadius.circular(
+                                        Dimensions.radius10,
+                                      ),
+                                      color: AppColors.mainColor,
+                                    ),
                                     child: Center(
                                       child: Text(
                                         popularController.totalItems.toString(),
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 10),
+                                          color: Colors.white,
+                                          fontSize: Dimensions.fontSize10,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -103,22 +108,26 @@ class RecommendedFoodDetailScreen extends StatelessWidget {
                   })),
                 ]),
             flexibleSpace: FlexibleSpaceBar(
-                background: Image(
-              image: NetworkImage(
-                  AppConstants.baseUrl + "/uploads/" + productModel.img!),
-              fit: BoxFit.cover,
-            )),
+              background: Image(
+                image: NetworkImage(
+                    AppConstants.baseUrl + "/uploads/" + productModel.img!),
+                fit: BoxFit.cover,
+              ),
+            ),
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(Dimensions.height20),
               child: Container(
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(Dimensions.radius20),
-                      topRight: Radius.circular(Dimensions.radius20)),
+                    topLeft: Radius.circular(Dimensions.radius20),
+                    topRight: Radius.circular(Dimensions.radius20),
+                  ),
                   color: Colors.white,
                 ),
-                child: Center(child: BigText(text: productModel.name!)),
+                child: Center(
+                  child: BigText(text: productModel.name!),
+                ),
               ),
             ),
             expandedHeight: Dimensions.height300,
@@ -126,10 +135,12 @@ class RecommendedFoodDetailScreen extends StatelessWidget {
             backgroundColor: AppColors.yellowColor,
           ),
           SliverToBoxAdapter(
-            child: ExpandableTextWidget(text: productModel.description!),
+            child: ExpandableTextWidget(
+              text: productModel.description!,
+            ),
           )
         ]),
-        bottomNavigationBar: GetBuilder<PopularProductController>(
+        bottomNavigationBar: GetBuilder<CartManagingController>(
           builder: (controller) {
             return Container(
               decoration: BoxDecoration(
@@ -141,7 +152,9 @@ class RecommendedFoodDetailScreen extends StatelessWidget {
                   Container(
                     color: Colors.white,
                     margin: EdgeInsets.only(
-                        top: Dimensions.height10, bottom: Dimensions.height10),
+                      top: Dimensions.height10,
+                      bottom: Dimensions.height10,
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -157,8 +170,10 @@ class RecommendedFoodDetailScreen extends StatelessWidget {
                                   BorderRadius.circular(Dimensions.radius20),
                               color: AppColors.mainColor,
                             ),
-                            child:
-                                const Icon(Icons.remove, color: Colors.white),
+                            child: const Icon(
+                              Icons.remove,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -178,9 +193,10 @@ class RecommendedFoodDetailScreen extends StatelessWidget {
                             width: Dimensions.width30,
                             height: Dimensions.height30,
                             decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.radius20),
-                                color: AppColors.mainColor),
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius20),
+                              color: AppColors.mainColor,
+                            ),
                             child: const Icon(
                               Icons.add,
                               color: Colors.white,
@@ -192,7 +208,9 @@ class RecommendedFoodDetailScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                        left: Dimensions.width20, right: Dimensions.width20),
+                      left: Dimensions.width20,
+                      right: Dimensions.width20,
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

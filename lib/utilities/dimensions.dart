@@ -4,6 +4,7 @@ class Dimensions {
   static double screenHeight = Get.context!.height;
   static double screenWidth = Get.context!.width;
 
+  static double fontSize10 = screenHeight / 76.94;
   static double fontSize15 = screenHeight / 51.29;
   static double fontSize17 = screenHeight / 45.26;
   static double fontSize20 = screenHeight / 38.47;
@@ -38,6 +39,7 @@ class Dimensions {
   static double width100 = screenHeight / 7.69;
   static double width130 = screenHeight / 5.91;
   static double width180 = screenHeight / 4.27;
+  static double width250 = screenHeight / 3.07;
 
   static double radius10 = screenHeight / 76.94;
   static double radius15 = screenHeight / 51.29;

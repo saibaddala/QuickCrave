@@ -1,17 +1,17 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:foodart/backend/app_constants.dart';
-import 'package:foodart/backend/popular_product_controller.dart';
-import 'package:foodart/backend/popular_product_model.dart';
-import 'package:foodart/backend/recommended_product_controller.dart';
+import 'package:foodart/backend/controllers/cart_managing_controller.dart';
+import 'package:foodart/backend/controllers/popular_product_controller.dart';
+import 'package:foodart/backend/models/product_model.dart';
+import 'package:foodart/backend/controllers/recommended_product_controller.dart';
 import 'package:foodart/reusable_widgets/big_text.dart';
 import 'package:foodart/reusable_widgets/name_review_geographics_widget.dart';
 import 'package:foodart/reusable_widgets/small_text.dart';
-import 'package:foodart/screens/popular_food_detail_screen.dart';
 import 'package:foodart/utilities/dimensions.dart';
 import 'package:get/get.dart';
 import '../reusable_widgets/icon_and_text_widget.dart';
-import '../route_helper.dart';
+import '../utilities/route_helper.dart';
 import '../utilities/colors.dart';
 
 class HomeScreenItemsBuilder extends StatefulWidget {
@@ -64,7 +64,7 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
               : Container(
                   margin: EdgeInsets.only(top: Dimensions.height20),
                   height: Dimensions.height320,
-                  child: Center(
+                  child: const Center(
                     child: CircularProgressIndicator(
                       color: AppColors.mainColor,
                     ),
@@ -112,13 +112,14 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: recommendedProductController
-                      .RecommendedProductListgetter.length,
+                      .recommendedProductListgetter.length,
                   itemBuilder: ((context, index) => buildListViewItem(
                         index,
                         recommendedProductController
-                            .RecommendedProductListgetter[index],
-                      )))
-              : CircularProgressIndicator(
+                            .recommendedProductListgetter[index],
+                      )),
+                )
+              : const CircularProgressIndicator(
                   color: AppColors.mainColor,
                 );
         })
@@ -127,7 +128,6 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
   }
 
   Widget _buildPageViewItem(int index, ProductModel popularProduct) {
-    var controller = Get.find<PopularProductController>();
     Matrix4 matrix = Matrix4.identity();
     if (index == currentPageValue.floor()) {
       var currentScaling = 1 - (currentPageValue - index) * (1 - scalingFactor);
@@ -156,7 +156,7 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
       transform: matrix,
       child: GestureDetector(
         onTap: () {
-          Get.toNamed(RouteHelper.getPopularFoodPage(index,"home"));
+          Get.toNamed(RouteHelper.getPopularFoodPage(index, "home"));
         },
         child: Stack(
           children: [
@@ -215,7 +215,7 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
   Widget buildListViewItem(int index, ProductModel recommendedProduct) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(RouteHelper.getRecommendedFoodPage(index,"homepage"));
+        Get.toNamed(RouteHelper.getRecommendedFoodPage(index, "homepage"));
       },
       child: Container(
         margin: EdgeInsets.only(

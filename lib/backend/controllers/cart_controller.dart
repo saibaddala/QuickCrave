@@ -1,9 +1,9 @@
-import 'package:foodart/backend/cart_model.dart';
-import 'package:foodart/backend/popular_product_model.dart';
+import 'package:foodart/backend/models/cart_model.dart';
+import 'package:foodart/backend/models/product_model.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 
-import 'cart_repo.dart';
+import '../repos/cart_repo.dart';
 
 class CartController extends GetxController {
   final CartRepo cartRepo;
@@ -11,7 +11,7 @@ class CartController extends GetxController {
 
   Map<int, CartModel> _items = {};
 
-  void addItem(ProductModel productModel, int quantity) {
+  void addItemToCart(ProductModel productModel, int quantity) {
     if (_items.containsKey(productModel.id!)) {
       print("contains");
       _items.update(productModel.id!, (value) {

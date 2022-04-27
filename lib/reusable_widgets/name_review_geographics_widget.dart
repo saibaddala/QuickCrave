@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodart/backend/popular_product_model.dart';
+import 'package:foodart/backend/models/product_model.dart';
 import 'package:foodart/reusable_widgets/big_text.dart';
 import 'package:foodart/reusable_widgets/icon_and_text_widget.dart';
 import 'package:foodart/reusable_widgets/small_text.dart';

@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:foodart/backend/cart_controller.dart';
-import 'package:foodart/backend/popular_product_controller.dart';
+import 'package:foodart/backend/controllers/cart_managing_controller.dart';
+import 'package:foodart/backend/controllers/popular_product_controller.dart';
 import 'package:foodart/reusable_widgets/big_text.dart';
 import 'package:foodart/reusable_widgets/expandable_text_widget.dart';
 import 'package:foodart/reusable_widgets/name_review_geographics_widget.dart';
-import 'package:foodart/screens/cart_page.dart';
 import 'package:foodart/utilities/colors.dart';
 import 'package:foodart/utilities/dimensions.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import '../backend/app_constants.dart';
-import '../route_helper.dart';
+import '../utilities/route_helper.dart';
 
 class PopularFoodDetailScreen extends StatelessWidget {
   final int pageIndex;
@@ -24,7 +21,7 @@ class PopularFoodDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var productmodel = Get.find<PopularProductController>()
         .popularProductListgetter[pageIndex];
-    var controller = Get.find<PopularProductController>();
+    var controller = Get.find<CartManagingController>();
     controller.checkQuantity(productmodel);
     return Scaffold(
       body: Stack(
@@ -53,11 +50,10 @@ class PopularFoodDetailScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     if (page == "cartpage") {
-                      Get.toNamed(RouteHelper.getCartPage());}
-                      else{
-                        Get.toNamed(RouteHelper.getHomeScreen());
-                      }
-                    
+                      Get.toNamed(RouteHelper.getCartPage());
+                    } else {
+                      Get.toNamed(RouteHelper.getMainPage());
+                    }
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -72,7 +68,7 @@ class PopularFoodDetailScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                GetBuilder<PopularProductController>(
+                GetBuilder<CartManagingController>(
                   builder: ((popularController) {
                     return GestureDetector(
                       onTap: () {
@@ -97,16 +93,18 @@ class PopularFoodDetailScreen extends StatelessWidget {
                                   right: 3,
                                   top: 2,
                                   child: Container(
-                                    height: 15,
-                                    width: 15,
+                                    height: Dimensions.height15,
+                                    width: Dimensions.width15,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(
+                                            Dimensions.radius10),
                                         color: AppColors.mainColor),
                                     child: Center(
                                       child: Text(
                                         popularController.totalItems.toString(),
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 10),
+                                            color: Colors.white,
+                                            fontSize: Dimensions.fontSize10),
                                       ),
                                     ),
                                   ),
@@ -167,7 +165,7 @@ class PopularFoodDetailScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            GetBuilder<PopularProductController>(builder: (controller) {
+            GetBuilder<CartManagingController>(builder: (controller) {
               return Container(
                 height: Dimensions.height50,
                 width: Dimensions.width100,
@@ -182,7 +180,7 @@ class PopularFoodDetailScreen extends StatelessWidget {
                         onTap: (() {
                           controller.setQuantity(false);
                         }),
-                        child: Icon(
+                        child: const Icon(
                           Icons.remove,
                           color: AppColors.signColor,
                         ),
@@ -192,7 +190,7 @@ class PopularFoodDetailScreen extends StatelessWidget {
                         onTap: (() {
                           controller.setQuantity(true);
                         }),
-                        child: Icon(
+                        child: const Icon(
                           Icons.add,
                           color: AppColors.signColor,
                         ),

@@ -1,11 +1,11 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:foodart/route_helper.dart';
+import 'package:foodart/backend/controllers/popular_product_controller.dart';
+import 'package:foodart/utilities/route_helper.dart';
+import 'package:foodart/utilities/dimensions.dart';
 import 'package:get/get.dart';
-
-import '../backend/popular_product_controller.dart';
-import '../backend/recommended_product_controller.dart';
+import '../backend/controllers/cart_managing_controller.dart';
+import '../backend/controllers/recommended_product_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -19,9 +19,9 @@ class _SplashScreenState extends State<SplashScreen>
   late Animation<double> animation;
   late AnimationController controller;
 
-  _loadResources() async {
+  Future<void> _loadResources() async {
     await Get.find<PopularProductController>().getPopularProductList();
-    await Get.find<RecommendedProductController>().getRecommendedProductList();
+    await Get.find<RecommendedProductController>().fetchRecommendedProductList();
   }
 
   @override
@@ -30,13 +30,19 @@ class _SplashScreenState extends State<SplashScreen>
     _loadResources();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
     )..forward();
-    animation = CurvedAnimation(parent: controller, curve: Curves.linear);
+    animation = CurvedAnimation(
+      parent: controller,
+      curve: Curves.linear,
+    );
 
-    Timer(Duration(seconds: 3), () {
-      Get.offNamed(RouteHelper.getMainPage());
-    });
+    Timer(
+      const Duration(seconds: 3),
+      () {
+        Get.offNamed(RouteHelper.getMainPage());
+      },
+    );
   }
 
   @override
@@ -47,16 +53,18 @@ class _SplashScreenState extends State<SplashScreen>
         ScaleTransition(
           scale: animation,
           child: Center(
-              child: Image.asset(
-            "assets/images/logo part 1.png",
-            width: 250,
-          )),
+            child: Image.asset(
+              "assets/images/logo part 1.png",
+              width: Dimensions.width250,
+            ),
+          ),
         ),
         Center(
-            child: Image.asset(
-          "assets/images/logo part 2.png",
-          width: 250,
-        ))
+          child: Image.asset(
+            "assets/images/logo part 2.png",
+            width: Dimensions.width250,
+          ),
+        )
       ]),
     );
   }
