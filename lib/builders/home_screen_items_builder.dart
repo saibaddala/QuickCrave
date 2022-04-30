@@ -280,9 +280,6 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
                             iconSize: Dimensions.iconSize15,
                             textSize: Dimensions.fontSize15,
                           ),
-                          SizedBox(
-                            width: Dimensions.width5,
-                          ),
                           IconAndText(
                             iconData: Icons.location_on,
                             text: "4.5km",
@@ -290,9 +287,6 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
                             textColor: AppColors.textColor,
                             iconSize: Dimensions.iconSize15,
                             textSize: Dimensions.fontSize15,
-                          ),
-                          SizedBox(
-                            width: Dimensions.width5,
                           ),
                           IconAndText(
                             iconData: Icons.timer,

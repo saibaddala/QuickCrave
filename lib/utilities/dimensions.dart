@@ -47,6 +47,7 @@ class Dimensions {
   static double radius35 = screenHeight / 21.98;
   static double radius40 = screenHeight / 19.23;
 
+  static double iconSize10 = screenHeight / 76.94;
   static double iconSize15 = screenHeight / 51.29;
   static double iconSize20 = screenHeight / 38.47;
   static double iconSize25 = screenHeight / 30.77;

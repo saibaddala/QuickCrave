@@ -5,4 +5,5 @@ class AppConstants {
   static const String popularProductUri = "api/v1/products/popular";
   static const String recommendedProductUri = "api/v1/products/recommended";
   static const String token = "DbToken";
+  static const String cartList = "Cart-List";
 }

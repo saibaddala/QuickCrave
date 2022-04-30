@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodart/backend/controllers/cart_controller.dart';
 import 'package:foodart/screens/cart_page.dart';
 import 'package:foodart/screens/home_screen.dart';
 import 'package:foodart/utilities/colors.dart';
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class MainPage extends StatefulWidget {
@@ -65,6 +67,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    Get.find<CartController>().getCartData();
     return PersistentTabView(
       context,
       controller: _controller,
