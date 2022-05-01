@@ -239,11 +239,11 @@ class CartPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(Dimensions.radius20),
           color: AppColors.buttonBackgroundColor,
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            GetBuilder<CartController>(builder: (controller) {
-              return Container(
+        child: GetBuilder<CartController>(builder: (controller) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
                 height: Dimensions.height50,
                 width: Dimensions.width100,
                 decoration: BoxDecoration(
@@ -253,26 +253,28 @@ class CartPage extends StatelessWidget {
                 child: Center(
                     child:
                         BigText(text: "₹" + controller.totalAmount.toString())),
-              );
-            }),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                alignment: Alignment.center,
-                height: Dimensions.height50,
-                width: Dimensions.width180,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.radius15),
-                  color: AppColors.mainColor,
-                ),
-                child: const BigText(
-                  text: "CheckOut",
-                  textColor: Colors.white,
-                ),
               ),
-            )
-          ],
-        ),
+              GestureDetector(
+                onTap: () {
+                 
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: Dimensions.height50,
+                  width: Dimensions.width180,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.radius15),
+                    color: AppColors.mainColor,
+                  ),
+                  child: const BigText(
+                    text: "CheckOut",
+                    textColor: Colors.white,
+                  ),
+                ),
+              )
+            ],
+          );
+        }),
       ),
     );
   }

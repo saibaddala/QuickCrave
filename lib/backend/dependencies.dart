@@ -18,11 +18,11 @@ Future<void> loadDependencies() async {
 
   Get.lazyPut(() => PopularProductRepo(apiClient: Get.find()));
   Get.lazyPut(() => RecommendedProductRepo(apiClient: Get.find()));
-  Get.lazyPut(() => CartRepo(sharedPreferences:Get.find()));
+  Get.lazyPut(() => CartRepo());
 
   Get.lazyPut(() => PopularProductController(popularProductRepo: Get.find()));
   Get.lazyPut(
       () => RecommendedProductController(recommendedProductRepo: Get.find()));
-  Get.lazyPut(() => CartManagingController());
   Get.lazyPut(() => CartController(cartRepo: Get.find()));
+  Get.put(CartManagingController());
 }

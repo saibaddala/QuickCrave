@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodart/backend/controllers/cart_controller.dart';
+import 'package:foodart/screens/cart_history_page.dart';
 import 'package:foodart/screens/cart_page.dart';
 import 'package:foodart/screens/home_screen.dart';
 import 'package:foodart/utilities/colors.dart';
@@ -29,7 +30,7 @@ class _MainPageState extends State<MainPage> {
       const Center(
         child: Text("No page Yet"),
       ),
-      const CartPage(),
+      const CartHistoryPage(),
       const Center(
         child: Text("No page Yet"),
       )
@@ -67,7 +68,6 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<CartController>().getCartData();
     return PersistentTabView(
       context,
       controller: _controller,

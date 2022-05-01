@@ -1,14 +1,13 @@
 import 'package:foodart/backend/models/cart_model.dart';
 import 'package:foodart/backend/models/product_model.dart';
 import 'package:get/get.dart';
-
 import '../repos/cart_repo.dart';
 
 class CartController extends GetxController {
   final CartRepo cartRepo;
   CartController({required this.cartRepo});
 
-  final Map<int, CartModel> _items = {};
+  Map<int, CartModel> _items = {};
 
   late List<CartModel> storageItems;
 
@@ -45,7 +44,6 @@ class CartController extends GetxController {
         _items.removeWhere((key, value) => key == productModel.id);
       }
     }
-    cartRepo.addToCartList(getItems());
   }
 
   int checkQuantity(ProductModel productModel) {
@@ -85,10 +83,5 @@ class CartController extends GetxController {
     for (CartModel item in storageItems) {
       _items.putIfAbsent(item.product!.id!, () => item);
     }
-  }
-
-  List<CartModel> getCartData() {
-    setCart = cartRepo.getCartList();
-    return storageItems;
   }
 }
