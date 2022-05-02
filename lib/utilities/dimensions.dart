@@ -8,7 +8,9 @@ class Dimensions {
   static double fontSize15 = screenHeight / 51.29;
   static double fontSize17 = screenHeight / 45.26;
   static double fontSize20 = screenHeight / 38.47;
+  static double fontSize30 = screenHeight / 25.64;
 
+  static double height2 = screenHeight / 384.72;
   static double height5 = screenHeight / 153.89;
   static double height10 = screenHeight / 76.94;
   static double height15 = screenHeight / 51.29;
@@ -24,10 +26,12 @@ class Dimensions {
   static double height130 = screenHeight / 5.91;
   static double height150 = screenHeight / 5.12;
   static double height220 = screenHeight / 3.49;
+  static double height280 = screenHeight / 2.74;
   static double height300 = screenHeight / 2.56;
   static double height320 = screenHeight / 2.40;
   static double height350 = screenHeight / 2.19;
 
+  static double width2 = screenHeight / 384.72;
   static double width5 = screenHeight / 153.89;
   static double width10 = screenHeight / 76.94;
   static double width15 = screenHeight / 51.29;
@@ -36,6 +40,7 @@ class Dimensions {
   static double width30 = screenHeight / 25.64;
   static double width40 = screenHeight / 19.23;
   static double width50 = screenHeight / 15.38;
+  static double width80 = screenHeight / 9.61;
   static double width100 = screenHeight / 7.69;
   static double width130 = screenHeight / 5.91;
   static double width180 = screenHeight / 4.27;

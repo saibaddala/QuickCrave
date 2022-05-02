@@ -1,39 +1,85 @@
 import 'package:flutter/material.dart';
 import 'package:foodart/reusable_widgets/big_text.dart';
+import 'package:foodart/reusable_widgets/image_and_text_widget.dart';
+import 'package:foodart/reusable_widgets/small_text.dart';
 import 'package:foodart/utilities/colors.dart';
+import 'package:foodart/utilities/dimensions.dart';
+import 'package:foodart/utilities/route_helper.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import '../backend/app_constants.dart';
 import '../backend/controllers/cart_controller.dart';
+import '../backend/models/cart_model.dart';
 
 class CartHistoryPage extends StatelessWidget {
   const CartHistoryPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var cartItemsHistory =
+        Get.find<CartController>().getCartHistoryList().reversed.toList();
+    Map<String, int> cartItemsAddedAtSpecificTime = {};
+
+    for (int i = 0; i < cartItemsHistory.length; i++) {
+      if (cartItemsAddedAtSpecificTime.containsKey(cartItemsHistory[i].time)) {
+        cartItemsAddedAtSpecificTime.update(
+            cartItemsHistory[i].time!, (value) => ++value);
+      } else {
+        cartItemsAddedAtSpecificTime.putIfAbsent(
+            cartItemsHistory[i].time!, () => 1);
+      }
+    }
+
+    List<int> orderedItemsCountList() {
+      return cartItemsAddedAtSpecificTime.entries.map((e) => e.value).toList();
+    }
+
+    List<String> atWhatTimeAddedTocart() {
+      return cartItemsAddedAtSpecificTime.entries.map((e) => e.key).toList();
+    }
+
+    List<int> orderedItemsCount = orderedItemsCountList();
+
+    List<String> cartListItemsOrderedTime = atWhatTimeAddedTocart();
+    int k = 0;
+    int x = 0;
+    Widget timeWidget(int index) {
+      var outputDate = DateTime.now().toString();
+      if (index < cartItemsHistory.length) {
+        var parseDate =
+            DateFormat("yyyy-MM-dd HH:mm:ss").parse(cartItemsHistory[x].time!);
+        var inputDate = DateTime.parse(parseDate.toString());
+        var outputFormat = DateFormat("MM-dd-yyyy hh:mm a");
+        outputDate = outputFormat.format(inputDate);
+      }
+      return BigText(text: outputDate);
+    }
+
     return Scaffold(
       body: Column(children: [
         Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
               color: AppColors.mainColor,
               borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20))),
-          padding: const EdgeInsets.only(top: 40),
+                  bottomLeft: Radius.circular(Dimensions.radius20),
+                  bottomRight: Radius.circular(Dimensions.radius20))),
+          padding: EdgeInsets.only(top: Dimensions.height40),
           width: double.maxFinite,
-          height: 100,
-          child: Stack(children: const [
+          height: Dimensions.height100,
+          child: Stack(children: [
             Positioned(
-              left: 280 / 2,
-              top: 25,
+              left: Dimensions.height280 / 2,
+              top: Dimensions.height25,
               child: BigText(
                 text: "Cart History",
                 textColor: Colors.white,
-                textSize: 30,
+                textSize: Dimensions.fontSize30,
               ),
             ),
             Positioned(
-              right: 20,
-              top: 25,
-              child: Icon(
+              right: Dimensions.width20,
+              top: Dimensions.width25,
+              child: const Icon(
                 Icons.shopping_cart_outlined,
                 color: Colors.white,
               ),
@@ -41,42 +87,156 @@ class CartHistoryPage extends StatelessWidget {
           ]),
         ),
         MediaQuery.removePadding(
-            context: context,
-            child: Expanded(
-                child: Container(
-              margin: const EdgeInsets.only(left: 25, right: 25, top: 5),
-              child: ListView(
-                children: [
-                  for (int i = 0; i < 5; i++)
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const BigText(text: "22/05/2021"),
-                          Wrap(
-                            direction: Axis.horizontal,
-                            children: List.generate(
-                              6,
-                              (index) => Container(
-                                margin: const EdgeInsets.only(left: 10),
-                                height: 80,
-                                width: 80,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  image: const DecorationImage(
-                                      image: AssetImage(
-                                          "assets/images/food0.png")),
+          context: context,
+          child: GetBuilder<CartController>(
+            builder: (controller) {
+              return controller.getCartHistoryList().isNotEmpty
+                  ? Expanded(
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            left: Dimensions.width25,
+                            right: Dimensions.width25,
+                            top: Dimensions.height5,
+                            bottom: Dimensions.height10),
+                        child: ListView(
+                          children: [
+                            for (int i = 0;
+                                i < cartItemsAddedAtSpecificTime.length;
+                                i++)
+                              Container(
+                                margin:
+                                    EdgeInsets.only(top: Dimensions.height10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    timeWidget(k),
+                                    Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Wrap(
+                                            direction: Axis.horizontal,
+                                            children: List.generate(
+                                                orderedItemsCount[k] > 3
+                                                    ? 3
+                                                    : orderedItemsCount[k],
+                                                (index) {
+                                              return Container(
+                                                  margin: EdgeInsets.only(
+                                                      top: Dimensions.height5,
+                                                      right: Dimensions.width5,
+                                                      bottom:
+                                                          Dimensions.height10),
+                                                  height: Dimensions.height80,
+                                                  width: Dimensions.width80,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            Dimensions
+                                                                .radius20),
+                                                    image: DecorationImage(
+                                                        image: NetworkImage(
+                                                            AppConstants
+                                                                    .baseUrl +
+                                                                "/uploads/" +
+                                                                cartItemsHistory[
+                                                                        x++]
+                                                                    .img!),
+                                                        fit: BoxFit.cover),
+                                                  ));
+                                            }),
+                                          ),
+                                          (() {
+                                            if (orderedItemsCount[k] > 3) {
+                                              x = x + orderedItemsCount[k] - 3;
+                                              return const SmallText(
+                                                  text: "and more....");
+                                            } else {
+                                              return const Text("");
+                                            }
+                                          }()),
+                                          SizedBox(
+                                            height: Dimensions.height80,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                const SmallText(text: "Total"),
+                                                BigText(
+                                                    text: orderedItemsCount[k++]
+                                                            .toString() +
+                                                        " Items"),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Map<int, CartModel>
+                                                        itemsTobeOrderedAgain =
+                                                        {};
+                                                    for (var element
+                                                        in cartItemsHistory) {
+                                                      if (element.time ==
+                                                          cartListItemsOrderedTime[
+                                                              i]) {
+                                                        itemsTobeOrderedAgain
+                                                            .putIfAbsent(
+                                                                element.id!,
+                                                                () {
+                                                          return element;
+                                                        });
+                                                      }
+                                                    }
+                                                    Get.find<CartController>()
+                                                        .addToCartListFromPastOrder(
+                                                            itemsTobeOrderedAgain);
+
+                                                    Get.toNamed(RouteHelper
+                                                        .getCartPage());
+                                                  },
+                                                  child: Container(
+                                                    alignment: Alignment.center,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                Dimensions
+                                                                    .radius10),
+                                                        border: Border.all(
+                                                            color: AppColors
+                                                                .mainColor,
+                                                            width: 1)),
+                                                    child: SmallText(
+                                                      text: "Reorder",
+                                                      textColor: AppColors
+                                                          .mainBlackColor,
+                                                      textSize:
+                                                          Dimensions.fontSize10,
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        ])
+                                  ],
                                 ),
-                              ),
-                            ),
-                          )
-                        ],
+                              )
+                          ],
+                        ),
                       ),
                     )
-                ],
-              ),
-            ))),
+                  : const SizedBox(
+                      height: 400,
+                      child: Center(
+                        child: ImageAndTextWidget(
+                          textToDisplay: "You didn't buy anything yet",
+                          imagePath: "assets/images/empty_box.png",
+                        ),
+                      ),
+                    );
+            },
+          ),
+        ),
       ]),
     );
   }

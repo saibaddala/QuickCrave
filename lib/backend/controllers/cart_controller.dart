@@ -1,19 +1,20 @@
 import 'package:foodart/backend/models/cart_model.dart';
 import 'package:foodart/backend/models/product_model.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../repos/cart_repo.dart';
 
 class CartController extends GetxController {
   final CartRepo cartRepo;
   CartController({required this.cartRepo});
 
-  Map<int, CartModel> _items = {};
+  Map<int, CartModel> items = {};
 
-  late List<CartModel> storageItems;
+  List<CartModel> storageItems = [];
 
   void addItemToCart(ProductModel productModel, int quantity) {
-    if (_items.containsKey(productModel.id!)) {
-      _items.update(productModel.id!, (value) {
+    if (items.containsKey(productModel.id!)) {
+      items.update(productModel.id!, (value) {
         return CartModel(
             id: value.id,
             name: value.name,
@@ -26,7 +27,7 @@ class CartController extends GetxController {
       });
     } else {
       if (quantity > 0) {
-        _items.putIfAbsent(productModel.id!, () {
+        items.putIfAbsent(productModel.id!, () {
           return CartModel(
               id: productModel.id,
               name: productModel.name,
@@ -39,16 +40,17 @@ class CartController extends GetxController {
         });
       }
     }
-    if (_items.containsKey(productModel.id!)) {
-      if (_items[productModel.id!]!.quantity == 0) {
-        _items.removeWhere((key, value) => key == productModel.id);
+    if (items.containsKey(productModel.id!)) {
+      if (items[productModel.id!]!.quantity == 0) {
+        items.removeWhere((key, value) => key == productModel.id);
       }
     }
+    cartRepo.addToCartList(getItems());
   }
 
   int checkQuantity(ProductModel productModel) {
-    if (_items.containsKey(productModel.id!)) {
-      var model = _items[productModel.id!];
+    if (items.containsKey(productModel.id!)) {
+      var model = items[productModel.id!];
       return model!.quantity!;
     } else {
       return 0;
@@ -57,31 +59,49 @@ class CartController extends GetxController {
 
   int gettotalitems() {
     int total = 0;
-    _items.forEach((key, value) {
+    items.forEach((key, value) {
       total += value.quantity!;
     });
     return total;
   }
 
   List<CartModel> getItems() {
-    return _items.entries.map((e) {
+    List<CartModel> item = items.entries.map((e) {
       return e.value;
     }).toList();
+
+    return item;
   }
 
   int get totalAmount {
     var total = 0;
-    _items.forEach((key, value) {
+    items.forEach((key, value) {
       total += value.quantity! * value.price!;
     });
     return total;
   }
 
-  set setCart(List<CartModel> items) {
-    storageItems = items;
-
-    for (CartModel item in storageItems) {
-      _items.putIfAbsent(item.product!.id!, () => item);
+  void getStoredCartListFromRepo() {
+    storageItems = cartRepo.getStoredCartList();
+    for (var element in storageItems) {
+      items.putIfAbsent(element.product!.id!, () => element);
     }
+  }
+
+  void addItemsToCartHistoryList() {
+    cartRepo.addItemsToCartHistoryList();
+    items.clear();
+    cartRepo.remove();
+    update();
+  }
+
+  List<CartModel> getCartHistoryList() {
+    return cartRepo.getCartHistoryListFromRepo();
+  }
+
+  void addToCartListFromPastOrder(Map<int, CartModel> pastItems) {
+    items = {};
+    items = pastItems;
+    cartRepo.addToCartList(getItems());
   }
 }

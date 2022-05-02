@@ -7,8 +7,6 @@ class CartManagingController extends GetxController {
   int quantity = 0;
   var titems = 0;
   var _incartItems = 0;
-  
-
 
   int get total => quantity + _incartItems;
   final CartController _cart = Get.find<CartController>();
