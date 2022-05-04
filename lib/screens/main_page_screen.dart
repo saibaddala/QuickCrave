@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodart/backend/controllers/cart_controller.dart';
+import 'package:foodart/screens/account_screen.dart';
 import 'package:foodart/screens/cart_history_page.dart';
 import 'package:foodart/screens/cart_page.dart';
 import 'package:foodart/screens/home_screen.dart';
+import 'package:foodart/screens/sign_in_screen.dart';
+import 'package:foodart/screens/sign_up_screen.dart';
 import 'package:foodart/utilities/colors.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -27,13 +30,9 @@ class _MainPageState extends State<MainPage> {
   List<Widget> _buildScreens() {
     return [
       const HomeScreen(),
-      const Center(
-        child: Text("No page Yet"),
-      ),
+      const SignInScreen(),
       const CartHistoryPage(),
-      const Center(
-        child: Text("No page Yet"),
-      )
+      const AccountScreen()
     ];
   }
 
