@@ -8,6 +8,6 @@ class RecommendedProductRepo extends GetxService {
   RecommendedProductRepo({required this.apiClient});
 
   Future<Response> fetchRecommendedProductListFromApi() async {
-    return apiClient.getData(AppConstants.recommendedProductUri);
+    return apiClient.getData(AppConstants.recommendedProductsUri);
   }
 }
