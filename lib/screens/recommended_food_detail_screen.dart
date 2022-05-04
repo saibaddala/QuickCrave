@@ -110,7 +110,7 @@ class RecommendedFoodDetailScreen extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
               background: Image(
                 image: NetworkImage(
-                    AppConstants.baseUrl + "/uploads/" + productModel.img!),
+                    AppConstants.baseUrl + AppConstants.uploadUrl + productModel.img!),
                 fit: BoxFit.cover,
               ),
             ),

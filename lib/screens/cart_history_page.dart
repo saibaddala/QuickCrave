@@ -138,7 +138,7 @@ class CartHistoryPage extends StatelessWidget {
                                                         image: NetworkImage(
                                                             AppConstants
                                                                     .baseUrl +
-                                                                "/uploads/" +
+                                                                AppConstants.uploadUrl +
                                                                 cartItemsHistory[
                                                                         x++]
                                                                     .img!),

@@ -169,7 +169,7 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
                 color: AppColors.mainColor,
                 image: DecorationImage(
                   image: NetworkImage(
-                      AppConstants.baseUrl + "/uploads/" + popularProduct.img!),
+                      AppConstants.baseUrl + AppConstants.uploadUrl + popularProduct.img!),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -234,7 +234,7 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
                 color: AppColors.mainColor,
                 image: DecorationImage(
                   image: NetworkImage(AppConstants.baseUrl +
-                      "/uploads/" +
+                      AppConstants.uploadUrl +
                       recommendedProduct.img!),
                   fit: BoxFit.cover,
                 ),
