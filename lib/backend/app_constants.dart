@@ -2,7 +2,8 @@ class AppConstants {
   static const String appName = "Foodart";
   static const int appVersion = 1;
 
-  static const String baseUrl = "http://10.0.2.2:8000";
+  // static const String baseUrl = "http://10.0.2.2:8000";
+  static const String baseUrl = "https://mvs.bslmeiyu.com";
   static const String popularProductsUri = "/api/v1/products/popular";
   static const String recommendedProductsUri = "/api/v1/products/recommended";
   static const String uploadUrl = "/uploads/";
