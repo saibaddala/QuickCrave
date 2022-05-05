@@ -1,7 +1,9 @@
 import 'package:foodart/backend/api_client.dart';
 import 'package:foodart/backend/app_constants.dart';
+import 'package:foodart/backend/controllers/auth_controller.dart';
 import 'package:foodart/backend/controllers/cart_controller.dart';
 import 'package:foodart/backend/controllers/popular_product_controller.dart';
+import 'package:foodart/backend/repos/auth_repo.dart';
 import 'package:foodart/backend/repos/cart_repo.dart';
 import 'package:foodart/backend/controllers/cart_managing_controller.dart';
 import 'package:foodart/backend/repos/popular_product_repo.dart';
@@ -19,10 +21,13 @@ Future<void> loadDependencies() async {
   Get.lazyPut(() => PopularProductRepo(apiClient: Get.find()));
   Get.lazyPut(() => RecommendedProductRepo(apiClient: Get.find()));
   Get.lazyPut(() => CartRepo(sharedPreferences: sharedPreferences));
+  Get.lazyPut(() => AuthRepo(apiClient: Get.find(),sharedPreferences: sharedPreferences));
 
   Get.lazyPut(() => PopularProductController(popularProductRepo: Get.find()));
   Get.lazyPut(
       () => RecommendedProductController(recommendedProductRepo: Get.find()));
   Get.lazyPut(() => CartController(cartRepo: Get.find()));
   Get.put(CartManagingController());
+  Get.lazyPut(() => AuthController(
+      authRepo: Get.find()));
 }
