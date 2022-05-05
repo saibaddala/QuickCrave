@@ -5,6 +5,7 @@ import 'package:foodart/reusable_widgets/custom_icon_widget.dart';
 import 'package:foodart/reusable_widgets/custom_textfield_widget.dart';
 import 'package:foodart/reusable_widgets/small_text.dart';
 import 'package:foodart/utilities/colors.dart';
+import 'package:foodart/utilities/dimensions.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -16,41 +17,45 @@ class SignInScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(Dimensions.width10),
           child: Column(
             children: [
               SizedBox(
-                height: 20,
+                height: Dimensions.height20,
               ),
               Center(
                 child: CircleAvatar(
                   backgroundColor: Colors.white,
-                  radius: 120,
-                  backgroundImage: AssetImage("assets/images/logo part 1.png"),
+                  radius: Dimensions.radius150,
+                  backgroundImage:
+                      const AssetImage("assets/images/logo part 1.png"),
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(left: 20),
+                padding: EdgeInsets.only(left: Dimensions.width20),
                 alignment: Alignment.centerLeft,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Hello",
-                      style:
-                          TextStyle(fontSize: 80, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: Dimensions.fontSize80,
+                          fontWeight: FontWeight.bold),
                     ),
                     Text(
                       "Sign into your account...",
-                      style: TextStyle(color: Colors.grey[500], fontSize: 25),
+                      style: TextStyle(
+                          color: Colors.grey[500],
+                          fontSize: Dimensions.fontSize25),
                     )
                   ],
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: Dimensions.height30,
               ),
               CustomTextFieldWidget(
                 textController: emailTextController,
@@ -58,7 +63,7 @@ class SignInScreen extends StatelessWidget {
                 iconData: Icons.email,
               ),
               SizedBox(
-                height: 20,
+                height: Dimensions.height20,
               ),
               CustomTextFieldWidget(
                 textController: passwordTextController,
@@ -66,39 +71,44 @@ class SignInScreen extends StatelessWidget {
                 iconData: Icons.key,
               ),
               SizedBox(
-                height: 20,
+                height: Dimensions.height20,
               ),
               Container(
-                height: 60,
-                width: 160,
+                height: Dimensions.height60,
+                width: Dimensions.width160,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(60 / 2),
+                    borderRadius:
+                        BorderRadius.circular(Dimensions.height60 / 2),
                     color: AppColors.mainColor),
-                child: Center(
-                    child: BigText(
-                  text: "SignIn",
-                  textColor: Colors.white,
-                )),
+                child: const Center(
+                  child: BigText(
+                    text: "SignIn",
+                    textColor: Colors.white,
+                  ),
+                ),
               ),
               SizedBox(
-                height: 30,
+                height: Dimensions.height30,
               ),
               RichText(
                 text: TextSpan(
                     text: "Don't have an account?",
                     recognizer: TapGestureRecognizer()..onTap = () {},
-                    style: TextStyle(color: Colors.grey[500], fontSize: 17),
+                    style: TextStyle(
+                        color: Colors.grey[500],
+                        fontSize: Dimensions.fontSize17),
                     children: [
                       TextSpan(
-                          text: "Create",
-                          style: TextStyle(
-                              color: AppColors.mainBlackColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22))
+                        text: "Create",
+                        style: TextStyle(
+                            color: AppColors.mainBlackColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: Dimensions.fontSize20),
+                      )
                     ]),
               ),
               SizedBox(
-                height: 5,
+                height: Dimensions.height5,
               ),
             ],
           ),

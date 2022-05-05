@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:foodart/reusable_widgets/big_text.dart';
-import 'package:foodart/reusable_widgets/custom_icon_widget.dart';
 import 'package:foodart/reusable_widgets/custom_textfield_widget.dart';
 import 'package:foodart/utilities/colors.dart';
+import 'package:foodart/utilities/dimensions.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -18,17 +18,18 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             SizedBox(
-              height: 20,
+              height: Dimensions.height20,
             ),
             Center(
               child: CircleAvatar(
                 backgroundColor: Colors.white,
-                radius: 120,
-                backgroundImage: AssetImage("assets/images/logo part 1.png"),
+                radius: Dimensions.radius120,
+                backgroundImage:
+                    const AssetImage("assets/images/logo part 1.png"),
               ),
             ),
             CustomTextFieldWidget(
@@ -37,7 +38,7 @@ class SignUpScreen extends StatelessWidget {
               iconData: Icons.email,
             ),
             SizedBox(
-              height: 20,
+              height: Dimensions.height20,
             ),
             CustomTextFieldWidget(
               textController: passwordTextController,
@@ -45,14 +46,14 @@ class SignUpScreen extends StatelessWidget {
               iconData: Icons.key,
             ),
             SizedBox(
-              height: 20,
+              height: Dimensions.height20,
             ),
             CustomTextFieldWidget(
                 textController: nameTextController,
                 hintText: "Name",
                 iconData: Icons.person),
             SizedBox(
-              height: 20,
+              height: Dimensions.height20,
             ),
             CustomTextFieldWidget(
               textController: phoneTextController,
@@ -60,53 +61,64 @@ class SignUpScreen extends StatelessWidget {
               iconData: Icons.phone,
             ),
             SizedBox(
-              height: 25,
+              height: Dimensions.height25,
             ),
             Container(
-              height: 60,
-              width: 160,
+              height: Dimensions.height60,
+              width: Dimensions.height160,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(60 / 2),
+                  borderRadius: BorderRadius.circular(Dimensions.height60 / 2),
                   color: AppColors.mainColor),
-              child: Center(
-                  child: BigText(
-                text: "SignUp",
-                textColor: Colors.white,
-              )),
+              child: const Center(
+                child: BigText(
+                  text: "SignUp",
+                  textColor: Colors.white,
+                ),
+              ),
             ),
             SizedBox(
-              height: 10,
+              height: Dimensions.height10,
             ),
             RichText(
-                text: TextSpan(
-                    text: "Have an account already?",
-                    recognizer: TapGestureRecognizer()..onTap = () {},
-                    style: TextStyle(color: Colors.grey[500], fontSize: 15))),
+              text: TextSpan(
+                text: "Have an account already?",
+                recognizer: TapGestureRecognizer()..onTap = () {},
+                style: TextStyle(
+                    color: Colors.grey[500], fontSize: Dimensions.fontSize15),
+              ),
+            ),
             SizedBox(
-              height: 5,
+              height: Dimensions.height5,
             ),
             RichText(
-                text: TextSpan(
-                    text: "Or  ",
-                    style: TextStyle(color: Colors.grey[500], fontSize: 15))),
+              text: TextSpan(
+                text: "Or  ",
+                style: TextStyle(
+                    color: Colors.grey[500], fontSize: Dimensions.fontSize15),
+              ),
+            ),
             SizedBox(
-              height: 5,
+              height: Dimensions.height5,
             ),
             RichText(
-                text: TextSpan(
-                    text: "SignUp with ",
-                    style: TextStyle(color: Colors.grey[500], fontSize: 15))),
+              text: TextSpan(
+                text: "SignUp with ",
+                style: TextStyle(
+                    color: Colors.grey[500], fontSize: Dimensions.fontSize15),
+              ),
+            ),
             Wrap(
               children: List.generate(
-                  3,
-                  (index) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundImage:
-                              AssetImage("assets/images/" + socialMedia[index]),
-                        ),
-                      )),
+                3,
+                (index) => Padding(
+                  padding: EdgeInsets.all(Dimensions.width10),
+                  child: CircleAvatar(
+                    radius: Dimensions.radius15,
+                    backgroundImage:
+                        AssetImage("assets/images/" + socialMedia[index]),
+                  ),
+                ),
+              ),
             )
           ],
         ),

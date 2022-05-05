@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:foodart/reusable_widgets/account_detail_row_widget.dart';
 import 'package:foodart/reusable_widgets/big_text.dart';
 import 'package:foodart/reusable_widgets/custom_icon_widget.dart';
-
 import '../utilities/colors.dart';
+import '../utilities/dimensions.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({Key? key}) : super(key: key);
@@ -12,72 +11,77 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 100,
-        backgroundColor: AppColors.mainColor,
-        title: const Center(
-          child: BigText(
-            text: "Profile",
-            textSize: 30,
-            textColor: Colors.white,
+        body: Column(
+      children: [
+        Container(
+          height: Dimensions.height150,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(Dimensions.radius40),
+                bottomRight: Radius.circular(Dimensions.radius40)),
+            color: AppColors.mainColor,
           ),
         ),
-      ),
-      body: Container(
-        margin: EdgeInsets.only(top: 15),
-        width: double.maxFinite,
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                  child: Column(
-                children: const [
-                  CustomIconWidget(
-                    icon: Icons.person,
-                    iconSize: 75,
-                    containerSize: 150,
+        Expanded(
+          child: Container(
+            margin: EdgeInsets.only(top: Dimensions.height15),
+            width: double.maxFinite,
+            child: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: Dimensions.radius80,
+                          backgroundImage:
+                              const AssetImage("assets/images/sai.png"),
+                        ),
+                        SizedBox(
+                          height: Dimensions.height15,
+                        ),
+                        const AccountDetailRowWidget(
+                            icon: Icons.person,
+                            fieldText: "Bunty",
+                            containerbackgroundColor: AppColors.mainColor),
+                        SizedBox(
+                          height: Dimensions.height15,
+                        ),
+                        const AccountDetailRowWidget(
+                            icon: Icons.call,
+                            fieldText: "9177149548",
+                            containerbackgroundColor: AppColors.mainColor),
+                        SizedBox(
+                          height: Dimensions.height15,
+                        ),
+                        const AccountDetailRowWidget(
+                            icon: Icons.email,
+                            fieldText: "saibaddala172@gmail.com",
+                            containerbackgroundColor: AppColors.mainColor),
+                        SizedBox(
+                          height: Dimensions.height15,
+                        ),
+                        const AccountDetailRowWidget(
+                            icon: Icons.location_city,
+                            fieldText: "Tirupati",
+                            containerbackgroundColor: AppColors.mainColor),
+                        SizedBox(
+                          height: Dimensions.height15,
+                        ),
+                        const AccountDetailRowWidget(
+                            icon: Icons.message,
+                            fieldText: "Sai",
+                            containerbackgroundColor: AppColors.mainColor),
+                      ],
+                    ),
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  AccountDetailRowWidget(
-                      icon: Icons.person,
-                      fieldText: "Bunty",
-                      containerbackgroundColor: Colors.lightBlueAccent),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  AccountDetailRowWidget(
-                      icon: Icons.call,
-                      fieldText: "9177149548",
-                      containerbackgroundColor: Colors.green),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  AccountDetailRowWidget(
-                      icon: Icons.email,
-                      fieldText: "saibaddala172@gmail.com",
-                      containerbackgroundColor: Colors.redAccent),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  AccountDetailRowWidget(
-                      icon: Icons.location_city,
-                      fieldText: "Tirupati",
-                      containerbackgroundColor: Colors.blueGrey),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  AccountDetailRowWidget(
-                      icon: Icons.message,
-                      fieldText: "Sai",
-                      containerbackgroundColor: Colors.amberAccent),
-                ],
-              )),
-            )
-          ],
+                )
+              ],
+            ),
+          ),
         ),
-      ),
-    );
+      ],
+    ));
   }
 }

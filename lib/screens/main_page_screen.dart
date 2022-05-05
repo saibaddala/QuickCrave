@@ -30,7 +30,7 @@ class _MainPageState extends State<MainPage> {
   List<Widget> _buildScreens() {
     return [
       const HomeScreen(),
-      const SignInScreen(),
+      const SignUpScreen(),
       const CartHistoryPage(),
       const AccountScreen()
     ];

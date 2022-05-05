@@ -56,35 +56,42 @@ class CartHistoryPage extends StatelessWidget {
     }
 
     return Scaffold(
+      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: GestureDetector(
+        onTap: () {},
+        child: Container(
+          height: Dimensions.height50,
+          width: Dimensions.width50,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: AppColors.mainColor,
+          ),
+          child: const Icon(
+            Icons.shopping_cart_outlined,
+            color: Colors.white,
+          ),
+        ),
+      ),
       body: Column(children: [
         Container(
           decoration: BoxDecoration(
-              color: AppColors.mainColor,
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(Dimensions.radius20),
-                  bottomRight: Radius.circular(Dimensions.radius20))),
+            color: AppColors.mainColor,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(Dimensions.radius35),
+              bottomRight: Radius.circular(Dimensions.radius35),
+            ),
+          ),
           padding: EdgeInsets.only(top: Dimensions.height40),
           width: double.maxFinite,
-          height: Dimensions.height100,
-          child: Stack(children: [
-            Positioned(
-              left: Dimensions.height280 / 2,
-              top: Dimensions.height25,
-              child: BigText(
-                text: "Cart History",
-                textColor: Colors.white,
-                textSize: Dimensions.fontSize30,
-              ),
+          height: Dimensions.height130,
+          child: Center(
+            child: BigText(
+              text: "Cart History",
+              textColor: Colors.white,
+              textSize: Dimensions.fontSize30,
             ),
-            Positioned(
-              right: Dimensions.width20,
-              top: Dimensions.width25,
-              child: const Icon(
-                Icons.shopping_cart_outlined,
-                color: Colors.white,
-              ),
-            )
-          ]),
+          ),
         ),
         MediaQuery.removePadding(
           context: context,
@@ -138,7 +145,8 @@ class CartHistoryPage extends StatelessWidget {
                                                         image: NetworkImage(
                                                             AppConstants
                                                                     .baseUrl +
-                                                                AppConstants.uploadUrl +
+                                                                AppConstants
+                                                                    .uploadUrl +
                                                                 cartItemsHistory[
                                                                         x++]
                                                                     .img!),
@@ -225,12 +233,14 @@ class CartHistoryPage extends StatelessWidget {
                         ),
                       ),
                     )
-                  : const SizedBox(
-                      height: 400,
-                      child: Center(
-                        child: ImageAndTextWidget(
-                          textToDisplay: "You didn't buy anything yet",
-                          imagePath: "assets/images/empty_box.png",
+                  : Expanded(
+                      child: SizedBox(
+                        height: Dimensions.height350,
+                        child: const Center(
+                          child: ImageAndTextWidget(
+                            textToDisplay: "You didn't buy anything yet",
+                            imagePath: "assets/images/empty_box.png",
+                          ),
                         ),
                       ),
                     );
