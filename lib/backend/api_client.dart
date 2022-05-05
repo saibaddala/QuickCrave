@@ -7,7 +7,11 @@ class ApiClient extends GetConnect implements GetxService {
   final String appBaseUrl;
   late Map<String, String> _mainHeaders;
   late SharedPreferences sharedPreferences;
-  ApiClient({required this.appBaseUrl, required this.sharedPreferences}) {
+
+  ApiClient({
+    required this.appBaseUrl,
+    required this.sharedPreferences,
+  }) {
     baseUrl = appBaseUrl;
     timeout = const Duration(seconds: 30);
     token = sharedPreferences.getString(AppConstants.userToken) ??
@@ -18,7 +22,10 @@ class ApiClient extends GetConnect implements GetxService {
     };
   }
 
-  Future<Response> getData(String uri, {Map<String, String>? headers}) async {
+  Future<Response> getData(
+    String uri, {
+    Map<String, String>? headers,
+  }) async {
     try {
       final Response response =
           await get(uri, headers: headers ?? _mainHeaders);
@@ -29,7 +36,9 @@ class ApiClient extends GetConnect implements GetxService {
   }
 
   Future<Response> postData(
-      String uri, Map<String, dynamic> authjsonData) async {
+    String uri,
+    Map<String, dynamic> authjsonData,
+  ) async {
     try {
       Response response = await post(uri, authjsonData, headers: _mainHeaders);
       return response;
