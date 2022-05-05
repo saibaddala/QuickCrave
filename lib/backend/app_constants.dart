@@ -9,6 +9,7 @@ class AppConstants {
 
   static const String signUpUrl = "/api/v1/auth/register";
   static const String signInUrl = "/api/v1/auth/login";
+  static const String userInfoUrl = "/api/v1/customer/info";
 
   static const String userToken = "";
   static const String userPhoneNumber = "";

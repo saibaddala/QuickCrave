@@ -161,7 +161,7 @@ class SignUpScreen extends StatelessWidget {
                           text: "Have an account already?",
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Get.toNamed(RouteHelper.signInpageRoute);
+                              Get.toNamed(RouteHelper.getSignInScreen());
                             },
                           style: TextStyle(
                               color: Colors.grey[500],
