@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
           shadowColor: Colors.white,
           elevation: 0,
           systemOverlayStyle:
-              SystemUiOverlayStyle(statusBarColor: Colors.white)),
+              const SystemUiOverlayStyle(statusBarColor: Colors.white)),
       backgroundColor: Colors.white,
       body: RefreshIndicator(
           color: AppColors.mainColor,

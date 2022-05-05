@@ -9,6 +9,7 @@ import 'package:foodart/reusable_widgets/custom_snackbar.dart';
 import 'package:foodart/reusable_widgets/custom_textfield_widget.dart';
 import 'package:foodart/utilities/colors.dart';
 import 'package:foodart/utilities/dimensions.dart';
+import 'package:foodart/utilities/route_helper.dart';
 import 'package:get/get.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -100,6 +101,7 @@ class SignUpScreen extends StatelessWidget {
                       CustomTextFieldWidget(
                         textController: passwordTextController,
                         hintText: "Password",
+                        obscuretext: true,
                         iconData: Icons.key,
                       ),
                       SizedBox(
@@ -125,7 +127,7 @@ class SignUpScreen extends StatelessWidget {
                           if (checkSignUpDetails()) {
                             SignUpDetailsModel signUpDetailsModelFromUi =
                                 getSignUpDetailsModelFromUi();
-                            SignUpResponseModel signUpResponseFromServer =
+                            ServerAuthResponseModel signUpResponseFromServer =
                                 await authController
                                     .registerUser(signUpDetailsModelFromUi);
 
@@ -157,7 +159,10 @@ class SignUpScreen extends StatelessWidget {
                       RichText(
                         text: TextSpan(
                           text: "Have an account already?",
-                          recognizer: TapGestureRecognizer()..onTap = () {},
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Get.toNamed(RouteHelper.signInpageRoute);
+                            },
                           style: TextStyle(
                               color: Colors.grey[500],
                               fontSize: Dimensions.fontSize15),

@@ -1,7 +1,6 @@
 import 'package:foodart/backend/models/cart_model.dart';
 import 'package:foodart/backend/models/product_model.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../repos/cart_repo.dart';
 
 class CartController extends GetxController {
@@ -91,7 +90,7 @@ class CartController extends GetxController {
   void addItemsToCartHistoryList() {
     cartRepo.addItemsToCartHistoryList();
     items.clear();
-    cartRepo.remove();
+    cartRepo.removeNotCheckedOutCartList();
     update();
   }
 
@@ -103,5 +102,10 @@ class CartController extends GetxController {
     items = {};
     items = pastItems;
     cartRepo.addToCartList(getItems());
+  }
+
+  void clearAllUserCartDataWhileLoggingOut() {
+    cartRepo.clearAllUserCartDataStoredLocally();
+    update();
   }
 }

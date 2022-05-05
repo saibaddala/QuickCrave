@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:foodart/backend/controllers/auth_controller.dart';
+import 'package:foodart/backend/controllers/cart_controller.dart';
 import 'package:foodart/reusable_widgets/account_detail_row_widget.dart';
 import 'package:foodart/reusable_widgets/big_text.dart';
 import 'package:foodart/reusable_widgets/custom_icon_widget.dart';
+import 'package:foodart/utilities/route_helper.dart';
+import 'package:get/get.dart';
 import '../utilities/colors.dart';
 import '../utilities/dimensions.dart';
 
@@ -71,8 +75,23 @@ class AccountScreen extends StatelessWidget {
                         ),
                         const AccountDetailRowWidget(
                             icon: Icons.message,
-                            fieldText: "Sai",
+                            fieldText: "messages",
                             containerbackgroundColor: AppColors.mainColor),
+                        GestureDetector(
+                          onTap: () {
+                            if (Get.find<AuthController>().isuserLoggedIn()) {
+                              Get.find<AuthController>()
+                                  .clearAllUserDataWhileLoggingOut();
+                              Get.find<CartController>()
+                                  .clearAllUserCartDataWhileLoggingOut();
+                              Get.toNamed(RouteHelper.signInpageRoute);
+                            }
+                          },
+                          child: const AccountDetailRowWidget(
+                              icon: Icons.logout,
+                              fieldText: "Logout",
+                              containerbackgroundColor: AppColors.mainColor),
+                        ),
                       ],
                     ),
                   ),

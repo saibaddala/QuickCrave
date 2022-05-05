@@ -7,17 +7,19 @@ class CustomLoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Container(
-      height: Dimensions.height50,
-      width: Dimensions.width50,
-      decoration: const BoxDecoration(
-          shape: BoxShape.circle, color: AppColors.mainColor),
-      child: const Center(
-        child: CircularProgressIndicator(
-          color: Colors.white,
+    return Scaffold(
+      body: Center(
+          child: Container(
+        height: Dimensions.height50,
+        width: Dimensions.width50,
+        decoration: const BoxDecoration(
+            shape: BoxShape.circle, color: AppColors.mainColor),
+        child: const Center(
+          child: CircularProgressIndicator(
+            color: Colors.white,
+          ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 }

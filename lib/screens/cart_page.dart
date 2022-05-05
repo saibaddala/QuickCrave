@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodart/backend/controllers/auth_controller.dart';
 import 'package:foodart/backend/controllers/cart_controller.dart';
 import 'package:foodart/backend/controllers/popular_product_controller.dart';
 import 'package:foodart/backend/controllers/recommended_product_controller.dart';
@@ -149,7 +150,7 @@ class CartPage extends StatelessWidget {
                                       image: DecorationImage(
                                         image: NetworkImage(AppConstants
                                                 .baseUrl +
-                                           AppConstants.uploadUrl +
+                                            AppConstants.uploadUrl +
                                             controller.getItems()[index].img!),
                                         fit: BoxFit.cover,
                                       ),
@@ -286,7 +287,11 @@ class CartPage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        controller.addItemsToCartHistoryList();
+                        if (Get.find<AuthController>().isuserLoggedIn()) {
+                          controller.addItemsToCartHistoryList();
+                        } else {
+                          Get.toNamed(RouteHelper.signInpageRoute);
+                        }
                       },
                       child: Container(
                         alignment: Alignment.center,

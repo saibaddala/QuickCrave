@@ -6,12 +6,14 @@ class CustomTextFieldWidget extends StatelessWidget {
   final TextEditingController textController;
   final String hintText;
   final IconData iconData;
-  const CustomTextFieldWidget(
-      {Key? key,
-      required this.textController,
-      required this.hintText,
-      required this.iconData})
-      : super(key: key);
+  final bool obscuretext;
+  const CustomTextFieldWidget({
+    Key? key,
+    required this.textController,
+    required this.hintText,
+    required this.iconData,
+    this.obscuretext = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class CustomTextFieldWidget extends StatelessWidget {
       child: TextField(
         controller: textController,
         autofocus: false,
+        obscureText: obscuretext,
         decoration: InputDecoration(
           hintText: hintText,
           prefixIcon: Icon(

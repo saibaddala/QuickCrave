@@ -1,9 +1,6 @@
-import 'package:foodart/backend/api_client.dart';
 import 'package:foodart/backend/models/sign_up_details_model.dart';
 import 'package:foodart/backend/models/sign_up_response_model.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/interceptors/get_modifiers.dart';
-
 import '../repos/auth_repo.dart';
 
 class AuthController extends GetxController implements GetxService {
@@ -16,23 +13,58 @@ class AuthController extends GetxController implements GetxService {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  Future<SignUpResponseModel> registerUser(
+  Future<ServerAuthResponseModel> registerUser(
       SignUpDetailsModel signUpDetailsModel) async {
     _isLoading = true;
     update();
     Response responseFromServer =
         await authRepo.registerUser(signUpDetailsModel.toJson());
-    late SignUpResponseModel signUpResponseModel;
+    late ServerAuthResponseModel signUpResponseModel;
     if (responseFromServer.statusCode == 200) {
       authRepo.saveUserToken(responseFromServer.body['token']);
       signUpResponseModel =
-          SignUpResponseModel(true, responseFromServer.body['token']);
+          ServerAuthResponseModel(true, responseFromServer.body['token']);
     } else {
       signUpResponseModel =
-          SignUpResponseModel(false, responseFromServer.statusText!);
+          ServerAuthResponseModel(false, responseFromServer.statusText!);
     }
+
     _isLoading = false;
     update();
     return signUpResponseModel;
+  }
+
+  Future<ServerAuthResponseModel> loginUser(
+      String mobileNumber, String password) async {
+    _isLoading = true;
+    update();
+    Response responseFromServer = await authRepo.loginUser({
+      'phone': mobileNumber,
+      'password': password,
+    });
+    late ServerAuthResponseModel signInResponseModel;
+    if (responseFromServer.statusCode == 200) {
+      authRepo.saveUserToken(responseFromServer.body['token']);
+      signInResponseModel =
+          ServerAuthResponseModel(true, responseFromServer.body['token']);
+    } else {
+      signInResponseModel =
+          ServerAuthResponseModel(false, responseFromServer.statusText!);
+    }
+    _isLoading = false;
+    update();
+    return signInResponseModel;
+  }
+
+  void saveUserNumberAndPasswordLocally(String number, String password) {
+    authRepo.saveLoggedInUserNumberAndPassword(number, password);
+  }
+
+  bool isuserLoggedIn() {
+    return authRepo.checkIfThereExistsUserTokenInDatabase();
+  }
+
+  void clearAllUserDataWhileLoggingOut() {
+    authRepo.clearAllUserDataStoredLocally();
   }
 }

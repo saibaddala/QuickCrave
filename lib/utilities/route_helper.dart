@@ -3,6 +3,8 @@ import 'package:foodart/screens/home_screen.dart';
 import 'package:foodart/screens/main_page_screen.dart';
 import 'package:foodart/screens/popular_food_detail_screen.dart';
 import 'package:foodart/screens/recommended_food_detail_screen.dart';
+import 'package:foodart/screens/sign_in_screen.dart';
+import 'package:foodart/screens/sign_up_screen.dart';
 import 'package:foodart/screens/splash_screen.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +15,8 @@ class RouteHelper {
   static const String popularFoodRoute = "/popularFoodScreen";
   static const String recommendedFoodRoute = "/recommendedFoodScreen";
   static const String cartPageRoute = "/cartPageScreen";
+  static const String signUppageRoute = "/signUpScreen";
+  static const String signInpageRoute = "/signInScreen";
 
   static String getSplashScreen() {
     return splashRoute;
@@ -28,6 +32,14 @@ class RouteHelper {
 
   static String getCartPage() {
     return cartPageRoute;
+  }
+
+  static String getSignUpScreen() {
+    return signUppageRoute;
+  }
+
+  static String getSignInScreen() {
+    return signInpageRoute;
   }
 
   static String getPopularFoodPage(int pageIndex, String page) {
@@ -73,6 +85,14 @@ class RouteHelper {
       GetPage(
           name: cartPageRoute,
           page: () => const CartPage(),
+          transition: Transition.fadeIn),
+      GetPage(
+          name: signUppageRoute,
+          page: () => const SignUpScreen(),
+          transition: Transition.fadeIn),
+      GetPage(
+          name: signInpageRoute,
+          page: () => const SignInScreen(),
           transition: Transition.fadeIn),
     ];
   }

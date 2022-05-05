@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:foodart/backend/app_constants.dart';
 import 'package:foodart/backend/models/cart_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,14 +19,15 @@ class CartRepo {
     }
 
     sharedPreferences.setStringList(
-        AppConstants.storedCartList, notCheckedOutCartList);
+        AppConstants.storedCartListBcozNotCheckedOut, notCheckedOutCartList);
   }
 
   List<CartModel> getStoredCartList() {
     List<String> storedCartListString = [];
-    if (sharedPreferences.containsKey(AppConstants.storedCartList)) {
-      storedCartListString =
-          sharedPreferences.getStringList(AppConstants.storedCartList)!;
+    if (sharedPreferences
+        .containsKey(AppConstants.storedCartListBcozNotCheckedOut)) {
+      storedCartListString = sharedPreferences
+          .getStringList(AppConstants.storedCartListBcozNotCheckedOut)!;
     }
     List<CartModel> storedCartList = [];
     for (var element in storedCartListString) {
@@ -50,8 +50,8 @@ class CartRepo {
     notCheckedOutCartList = [];
   }
 
-  void remove() {
-    sharedPreferences.remove(AppConstants.storedCartList);
+  void removeNotCheckedOutCartList() {
+    sharedPreferences.remove(AppConstants.storedCartListBcozNotCheckedOut);
   }
 
   List<CartModel> getCartHistoryListFromRepo() {
@@ -65,5 +65,10 @@ class CartRepo {
       cartHistoryItems.add(CartModel.fromJson(jsonDecode(element)));
     }
     return cartHistoryItems;
+  }
+
+  void clearAllUserCartDataStoredLocally() {
+    removeNotCheckedOutCartList();
+    sharedPreferences.remove(AppConstants.cartHistoryList);
   }
 }

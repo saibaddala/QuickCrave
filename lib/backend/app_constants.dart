@@ -8,8 +8,12 @@ class AppConstants {
   static const String uploadUrl = "/uploads/";
 
   static const String signUpUrl = "/api/v1/auth/register";
+  static const String signInUrl = "/api/v1/auth/login";
 
-  static const String token = "DbToken";
-  static const String storedCartList = "Stored-Cart-List";
+  static const String userToken = "";
+  static const String userPhoneNumber = "";
+  static const String userPassword = "";
+
+  static const String storedCartListBcozNotCheckedOut = "Stored-Cart-List";
   static const String cartHistoryList = "Cart-History-List";
 }
