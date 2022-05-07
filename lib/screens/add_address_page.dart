@@ -262,7 +262,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                                       .addAddress(addressModel)
                                       .then((response) {
                                     if (response.isSuccess) {
-                                      Get.toNamed(RouteHelper.homeScreenRoute);
+                                      Get.toNamed(RouteHelper.getMainPage());
                                       showCustomSnackBar(
                                           message: "Address saved succesfully",
                                           title: "Address",

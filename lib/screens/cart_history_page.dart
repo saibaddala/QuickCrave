@@ -134,13 +134,13 @@ class CartHistoryPage extends StatelessWidget {
                                                       right: Dimensions.width5,
                                                       bottom:
                                                           Dimensions.height10),
-                                                  height: Dimensions.height80,
-                                                  width: Dimensions.width80,
+                                                  height: Dimensions.height50,
+                                                  width: Dimensions.width50,
                                                   decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             Dimensions
-                                                                .radius20),
+                                                                .radius10),
                                                     image: DecorationImage(
                                                         image: NetworkImage(
                                                             AppConstants
@@ -203,7 +203,8 @@ class CartHistoryPage extends StatelessWidget {
                                                         .getCartPage());
                                                   },
                                                   child: Container(
-                                                    alignment: Alignment.center,
+                                                    height: Dimensions.height15,
+                                                    width: Dimensions.width50,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius.circular(
@@ -213,12 +214,14 @@ class CartHistoryPage extends StatelessWidget {
                                                             color: AppColors
                                                                 .mainColor,
                                                             width: 1)),
-                                                    child: SmallText(
-                                                      text: "Reorder",
-                                                      textColor: AppColors
-                                                          .mainBlackColor,
-                                                      textSize:
-                                                          Dimensions.fontSize10,
+                                                    child: Center(
+                                                      child: SmallText(
+                                                        text: "Reorder",
+                                                        textColor: AppColors
+                                                            .mainBlackColor,
+                                                        textSize: Dimensions
+                                                            .fontSize10,
+                                                      ),
                                                     ),
                                                   ),
                                                 )

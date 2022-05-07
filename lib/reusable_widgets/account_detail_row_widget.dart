@@ -24,7 +24,7 @@ class AccountDetailRowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(
-        Dimensions.radius10,
+        Dimensions.height10,
       ),
       decoration: BoxDecoration(
         boxShadow: [

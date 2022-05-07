@@ -5,6 +5,7 @@ import 'package:foodart/backend/controllers/location_controller.dart';
 import 'package:foodart/backend/controllers/popular_product_controller.dart';
 import 'package:foodart/backend/controllers/recommended_product_controller.dart';
 import 'package:foodart/reusable_widgets/big_text.dart';
+import 'package:foodart/reusable_widgets/custom_snackbar.dart';
 import 'package:foodart/reusable_widgets/image_and_text_widget.dart';
 import 'package:foodart/reusable_widgets/small_text.dart';
 import 'package:foodart/utilities/colors.dart';
@@ -294,7 +295,12 @@ class CartPage extends StatelessWidget {
                               .isEmpty) {
                             Get.toNamed(RouteHelper.getAddAddressScreen());
                           } else {
-                            Get.toNamed(RouteHelper.homeScreenRoute);
+                            Get.toNamed(RouteHelper.getMainPage());
+                            showCustomSnackBar(
+                              message: "Checked Out Successfully",
+                              isError: false,
+                              title: "Order",
+                            );
                           }
                           controller.addItemsToCartHistoryList();
                         } else {

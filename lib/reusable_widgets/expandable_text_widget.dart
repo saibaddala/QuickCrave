@@ -6,7 +6,7 @@ import 'package:foodart/utilities/dimensions.dart';
 class ExpandableTextWidget extends StatefulWidget {
   final String text;
 
- const  ExpandableTextWidget({
+  const ExpandableTextWidget({
     Key? key,
     required this.text,
   }) : super(key: key);
@@ -36,7 +36,8 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
+      margin:
+          EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
       child: secondHalf.isEmpty
           ? SmallText(
               text: firstHalf,
@@ -64,8 +65,14 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
                     textColor: AppColors.mainColor,
                   ),
                   textHidden
-                      ? const Icon(Icons.arrow_drop_down,color: AppColors.mainColor,)
-                      : const Icon(Icons.arrow_drop_up,color: AppColors.mainColor,)
+                      ? const Icon(
+                          Icons.arrow_drop_down,
+                          color: AppColors.mainColor,
+                        )
+                      : const Icon(
+                          Icons.arrow_drop_up,
+                          color: AppColors.mainColor,
+                        )
                 ]),
               )
             ]),

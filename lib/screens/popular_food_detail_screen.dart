@@ -33,8 +33,9 @@ class PopularFoodDetailScreen extends StatelessWidget {
               height: Dimensions.height350,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(
-                      AppConstants.baseUrl + AppConstants.uploadUrl + productmodel.img!),
+                  image: NetworkImage(AppConstants.baseUrl +
+                      AppConstants.uploadUrl +
+                      productmodel.img!),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -57,7 +58,7 @@ class PopularFoodDetailScreen extends StatelessWidget {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                        color: const Color(0xFFfcf4e4),
+                        color: Colors.white,
                         borderRadius:
                             BorderRadius.circular(Dimensions.radius20)),
                     height: Dimensions.height30,

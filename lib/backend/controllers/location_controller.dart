@@ -94,7 +94,6 @@ class LocationController extends GetxController implements GetxService {
     Response response = await locationRepo.getAddressFromGeoCode(latLng);
     if (response.body['status'] == 'OK') {
       _address = response.body['results'][0]['formatted_address'].toString();
-      showCustomSnackBar(message: _address, title: "Location", isError: false);
     } else {
       showCustomSnackBar(message: response.bodyString!);
     }

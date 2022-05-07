@@ -113,7 +113,7 @@ class SignInScreen extends StatelessWidget {
                                   await authController.loginUser(
                                       mobileNumber, password);
                               if (serverAuthResponseModel.isSuccess) {
-                                Get.toNamed(RouteHelper.homeScreenRoute);
+                                Get.toNamed(RouteHelper.getMainPage());
                               } else {
                                 showCustomSnackBar(
                                     message: serverAuthResponseModel.message);

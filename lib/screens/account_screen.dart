@@ -62,27 +62,18 @@ class AccountScreen extends StatelessWidget {
                                           backgroundImage: const AssetImage(
                                               "assets/images/sai.png"),
                                         ),
-                                        SizedBox(
-                                          height: Dimensions.height15,
-                                        ),
                                         AccountDetailRowWidget(
                                             icon: Icons.person,
                                             fieldText:
                                                 userController.userModel.name,
                                             containerbackgroundColor:
                                                 AppColors.mainColor),
-                                        SizedBox(
-                                          height: Dimensions.height15,
-                                        ),
                                         AccountDetailRowWidget(
                                             icon: Icons.call,
                                             fieldText:
                                                 userController.userModel.phone,
                                             containerbackgroundColor:
                                                 AppColors.mainColor),
-                                        SizedBox(
-                                          height: Dimensions.height15,
-                                        ),
                                         AccountDetailRowWidget(
                                             icon: Icons.email,
                                             fieldText:
@@ -90,42 +81,43 @@ class AccountScreen extends StatelessWidget {
                                             containerbackgroundColor:
                                                 AppColors.mainColor),
                                         GetBuilder<LocationController>(
-                                            builder: ((locationController) {
-                                          if (_isUserLoggedIn &&
-                                              locationController
-                                                  .addressList.isEmpty) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                Get.toNamed(RouteHelper
-                                                    .addAddressPageRoute);
-                                              },
-                                              child:
-                                                  const AccountDetailRowWidget(
-                                                      icon: Icons.location_city,
-                                                      fieldText: "Your Address",
-                                                      containerbackgroundColor:
-                                                          AppColors.mainColor),
-                                            );
-                                          } else {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                Get.toNamed(RouteHelper
-                                                    .addAddressPageRoute);
-                                              },
-                                              child: AccountDetailRowWidget(
-                                                  icon: Icons.location_city,
-                                                  fieldText: locationController
-                                                          .addressToDisplay
-                                                          .substring(0, 15) +
-                                                      "....",
-                                                  overflowRequired: true,
-                                                  containerbackgroundColor:
-                                                      AppColors.mainColor),
-                                            );
-                                          }
-                                        })),
-                                        SizedBox(
-                                          height: Dimensions.height15,
+                                          builder: ((locationController) {
+                                            if (_isUserLoggedIn &&
+                                                locationController
+                                                    .addressList.isEmpty) {
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  Get.toNamed(RouteHelper
+                                                      .addAddressPageRoute);
+                                                },
+                                                child:
+                                                    const AccountDetailRowWidget(
+                                                        icon:
+                                                            Icons.location_city,
+                                                        fieldText:
+                                                            "Your Address",
+                                                        containerbackgroundColor:
+                                                            AppColors
+                                                                .mainColor),
+                                              );
+                                            } else {
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  Get.toNamed(RouteHelper
+                                                      .addAddressPageRoute);
+                                                },
+                                                child: AccountDetailRowWidget(
+                                                    icon: Icons.location_city,
+                                                    fieldText: locationController
+                                                            .addressToDisplay
+                                                            .substring(0, 15) +
+                                                        "....",
+                                                    overflowRequired: true,
+                                                    containerbackgroundColor:
+                                                        AppColors.mainColor),
+                                              );
+                                            }
+                                          }),
                                         ),
                                         const AccountDetailRowWidget(
                                             icon: Icons.message,
@@ -150,7 +142,7 @@ class AccountScreen extends StatelessWidget {
                                               icon: Icons.logout,
                                               fieldText: "Logout",
                                               containerbackgroundColor:
-                                                  AppColors.mainColor),
+                                                  Colors.redAccent),
                                         ),
                                       ],
                                     ),
