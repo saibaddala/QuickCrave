@@ -16,6 +16,11 @@ class AppConstants {
   static const String userPhoneNumber = "";
   static const String userPassword = "";
 
+  static const String userAddress = "user_address";
+  static const String addUserAddress = "/api/v1/customer/address/add";
+  static const String addressListUri = "/api/v1/customer/address/list";
+  static const String geoCodeUri = "/api/v1/config/geocode-api";
+
   static const String storedCartListBcozNotCheckedOut = "Stored-Cart-List";
   static const String cartHistoryList = "Cart-History-List";
 }

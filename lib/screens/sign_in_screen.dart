@@ -12,7 +12,7 @@ import 'package:foodart/utilities/route_helper.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
-import '../backend/models/sign_up_response_model.dart';
+import '../backend/models/server_auth_response_model.dart';
 import '../reusable_widgets/custom_snackbar.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -20,7 +20,8 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController mobileNumberTextController = TextEditingController();
+    final TextEditingController mobileNumberTextController =
+        TextEditingController();
     final TextEditingController passwordTextController =
         TextEditingController();
 

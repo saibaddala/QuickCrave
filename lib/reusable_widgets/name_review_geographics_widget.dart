@@ -9,7 +9,7 @@ import 'package:foodart/utilities/dimensions.dart';
 class NameAndReviewAndGeographicsWidget extends StatelessWidget {
   final double iconSize;
   final double textSize;
-   ProductModel? popularProducts;
+  ProductModel? popularProducts;
   NameAndReviewAndGeographicsWidget({
     Key? key,
     ProductModel? popularProduct,
@@ -28,7 +28,8 @@ class NameAndReviewAndGeographicsWidget extends StatelessWidget {
         top: Dimensions.height15,
       ),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        BigText(text: popularProducts!=null?popularProducts!.name!:"No data"),
+        BigText(
+            text: popularProducts != null ? popularProducts!.name! : "No data"),
         SizedBox(
           height: Dimensions.height5,
         ),
@@ -36,17 +37,21 @@ class NameAndReviewAndGeographicsWidget extends StatelessWidget {
           children: [
             Wrap(
               children: List.generate(
-                  5,
-                  (index) => Icon(
-                        Icons.star,
-                        size: Dimensions.iconSize15,
-                        color: AppColors.mainColor,
-                      )),
+                5,
+                (index) => Icon(
+                  Icons.star,
+                  size: Dimensions.iconSize15,
+                  color: AppColors.mainColor,
+                ),
+              ),
             ),
             SizedBox(
               width: Dimensions.width5,
             ),
-            SmallText(text: popularProducts!=null?popularProducts!.stars!.toString():"No data"),
+            SmallText(
+                text: popularProducts != null
+                    ? popularProducts!.stars!.toString()
+                    : "No data"),
             SizedBox(
               width: Dimensions.width10,
             ),

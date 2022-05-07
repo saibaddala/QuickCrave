@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:foodart/backend/controllers/auth_controller.dart';
 import 'package:foodart/backend/models/sign_up_details_model.dart';
-import 'package:foodart/backend/models/sign_up_response_model.dart';
+import 'package:foodart/backend/models/server_auth_response_model.dart';
 import 'package:foodart/reusable_widgets/big_text.dart';
 import 'package:foodart/reusable_widgets/custom_loading_screen.dart';
 import 'package:foodart/reusable_widgets/custom_snackbar.dart';

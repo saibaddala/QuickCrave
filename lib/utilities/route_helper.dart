@@ -1,6 +1,8 @@
+import 'package:foodart/screens/add_address_page.dart';
 import 'package:foodart/screens/cart_page.dart';
 import 'package:foodart/screens/home_screen.dart';
 import 'package:foodart/screens/main_page_screen.dart';
+import 'package:foodart/screens/pick_address_from_map.dart';
 import 'package:foodart/screens/popular_food_detail_screen.dart';
 import 'package:foodart/screens/recommended_food_detail_screen.dart';
 import 'package:foodart/screens/sign_in_screen.dart';
@@ -17,6 +19,8 @@ class RouteHelper {
   static const String cartPageRoute = "/cartPageScreen";
   static const String signUppageRoute = "/signUpScreen";
   static const String signInpageRoute = "/signInScreen";
+  static const String addAddressPageRoute = "/addAdress";
+  static const String pickAddressFromPageRoute = "/pickAddressFromMap";
 
   static String getSplashScreen() {
     return splashRoute;
@@ -42,6 +46,14 @@ class RouteHelper {
     return signInpageRoute;
   }
 
+  static String getAddAddressScreen() {
+    return addAddressPageRoute;
+  }
+
+  static String getPickAddressFromMapScreen() {
+    return pickAddressFromPageRoute;
+  }
+
   static String getPopularFoodPage(int pageIndex, String page) {
     return "$popularFoodRoute?pageId=$pageIndex&page=$page";
   }
@@ -49,6 +61,8 @@ class RouteHelper {
   static String getRecommendedFoodPage(int listItemIndex, String page) {
     return "$recommendedFoodRoute?listItemId=$listItemIndex&page=$page";
   }
+
+
 
   static List<GetPage> getPages() {
     return [
@@ -93,6 +107,17 @@ class RouteHelper {
       GetPage(
           name: signInpageRoute,
           page: () => const SignInScreen(),
+          transition: Transition.fadeIn),
+      GetPage(
+          name: addAddressPageRoute,
+          page: () => const AddAddressPage(),
+          transition: Transition.fadeIn),
+      GetPage(
+          name: pickAddressFromPageRoute,
+          page: () {
+            PickAddressFromMap _pickAddress = Get.arguments;
+            return _pickAddress;
+          },
           transition: Transition.fadeIn),
     ];
   }

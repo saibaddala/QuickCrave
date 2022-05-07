@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodart/backend/controllers/auth_controller.dart';
 import 'package:foodart/backend/controllers/cart_controller.dart';
+import 'package:foodart/backend/controllers/location_controller.dart';
 import 'package:foodart/backend/controllers/user_controller.dart';
 import 'package:foodart/reusable_widgets/account_detail_row_widget.dart';
 import 'package:foodart/reusable_widgets/big_text.dart';
@@ -37,6 +38,13 @@ class AccountScreen extends StatelessWidget {
                                 bottomRight:
                                     Radius.circular(Dimensions.radius40)),
                             color: AppColors.mainColor,
+                          ),
+                          child: Center(
+                            child: BigText(
+                              text: "Profile",
+                              textSize: Dimensions.fontSize30,
+                              textColor: Colors.white,
+                            ),
                           ),
                         ),
                         Expanded(
@@ -81,14 +89,41 @@ class AccountScreen extends StatelessWidget {
                                                 userController.userModel.email,
                                             containerbackgroundColor:
                                                 AppColors.mainColor),
-                                        SizedBox(
-                                          height: Dimensions.height15,
-                                        ),
-                                        const AccountDetailRowWidget(
-                                            icon: Icons.location_city,
-                                            fieldText: "Tirupati",
-                                            containerbackgroundColor:
-                                                AppColors.mainColor),
+                                        GetBuilder<LocationController>(
+                                            builder: ((locationController) {
+                                          if (_isUserLoggedIn &&
+                                              locationController
+                                                  .addressList.isEmpty) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                Get.toNamed(RouteHelper
+                                                    .addAddressPageRoute);
+                                              },
+                                              child:
+                                                  const AccountDetailRowWidget(
+                                                      icon: Icons.location_city,
+                                                      fieldText: "Your Address",
+                                                      containerbackgroundColor:
+                                                          AppColors.mainColor),
+                                            );
+                                          } else {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                Get.toNamed(RouteHelper
+                                                    .addAddressPageRoute);
+                                              },
+                                              child: AccountDetailRowWidget(
+                                                  icon: Icons.location_city,
+                                                  fieldText: locationController
+                                                          .addressToDisplay
+                                                          .substring(0, 15) +
+                                                      "....",
+                                                  overflowRequired: true,
+                                                  containerbackgroundColor:
+                                                      AppColors.mainColor),
+                                            );
+                                          }
+                                        })),
                                         SizedBox(
                                           height: Dimensions.height15,
                                         ),
@@ -105,8 +140,10 @@ class AccountScreen extends StatelessWidget {
                                                   .clearAllUserDataWhileLoggingOut();
                                               Get.find<CartController>()
                                                   .clearAllUserCartDataWhileLoggingOut();
-                                              Get.toNamed(
-                                                  RouteHelper.getSignInScreen());
+                                              Get.toNamed(RouteHelper
+                                                  .getSignInScreen());
+                                              Get.find<LocationController>()
+                                                  .clearAddressList();
                                             }
                                           },
                                           child: const AccountDetailRowWidget(

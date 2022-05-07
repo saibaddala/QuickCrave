@@ -74,19 +74,19 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
         GetBuilder<PopularProductController>(
             builder: (popularproductcontroller) {
           return DotsIndicator(
-              dotsCount: popularproductcontroller
-                      .popularProductListgetter.isEmpty
-                  ? 1
-                  : popularproductcontroller.popularProductListgetter.length,
-              position: currentPageValue,
-              decorator: DotsDecorator(
-                size: const Size.square(9.0),
-                activeSize: const Size(18.0, 9.0),
-                activeShape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                activeColor: AppColors.mainColor,
-              ));
+            dotsCount: popularproductcontroller.popularProductListgetter.isEmpty
+                ? 1
+                : popularproductcontroller.popularProductListgetter.length,
+            position: currentPageValue,
+            decorator: DotsDecorator(
+              size: const Size.square(9.0),
+              activeSize: const Size(18.0, 9.0),
+              activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              activeColor: AppColors.mainColor,
+            ),
+          );
         }),
         SizedBox(
           height: Dimensions.height10,
@@ -168,8 +168,9 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
                 borderRadius: BorderRadius.circular(Dimensions.radius35),
                 color: AppColors.mainColor,
                 image: DecorationImage(
-                  image: NetworkImage(
-                      AppConstants.baseUrl + AppConstants.uploadUrl + popularProduct.img!),
+                  image: NetworkImage(AppConstants.baseUrl +
+                      AppConstants.uploadUrl +
+                      popularProduct.img!),
                   fit: BoxFit.cover,
                 ),
               ),

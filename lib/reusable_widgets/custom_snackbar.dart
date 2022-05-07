@@ -11,9 +11,9 @@ void showCustomSnackBar(
       ),
       messageText: Text(
         message,
-        style:const TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
-      backgroundColor: Colors.redAccent,
+      backgroundColor: isError ? Colors.redAccent : Colors.greenAccent,
       colorText: Colors.white,
       snackPosition: SnackPosition.TOP);
 }

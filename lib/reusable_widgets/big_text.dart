@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodart/utilities/colors.dart';
 import 'package:foodart/utilities/dimensions.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BigText extends StatelessWidget {
@@ -14,7 +13,7 @@ class BigText extends StatelessWidget {
     Key? key,
     required this.text,
     this.textColor = AppColors.mainBlackColor,
-    this.textSize = 25,
+    this.textSize = 40,
     this.textOverflow = TextOverflow.ellipsis,
     this.wantOverflow = false,
   }) : super(key: key);

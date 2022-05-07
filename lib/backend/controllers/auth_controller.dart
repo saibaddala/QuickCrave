@@ -1,5 +1,5 @@
 import 'package:foodart/backend/models/sign_up_details_model.dart';
-import 'package:foodart/backend/models/sign_up_response_model.dart';
+import 'package:foodart/backend/models/server_auth_response_model.dart';
 import 'package:get/get.dart';
 import '../repos/auth_repo.dart';
 

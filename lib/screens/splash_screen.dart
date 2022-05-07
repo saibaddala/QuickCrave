@@ -20,7 +20,8 @@ class _SplashScreenState extends State<SplashScreen>
 
   Future<void> _loadResources() async {
     await Get.find<PopularProductController>().getPopularProductList();
-    await Get.find<RecommendedProductController>().fetchRecommendedProductList();
+    await Get.find<RecommendedProductController>()
+        .fetchRecommendedProductList();
   }
 
   @override

@@ -1,7 +1,7 @@
 import 'package:foodart/backend/models/user_model.dart';
 import 'package:foodart/backend/repos/user_repo.dart';
 import 'package:get/get.dart';
-import '../models/sign_up_response_model.dart';
+import '../models/server_auth_response_model.dart';
 
 class UserController extends GetxController implements GetxService {
   final UserRepo userRepo;
