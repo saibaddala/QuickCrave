@@ -1,20 +1,6 @@
 # foodart
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    
+    Foodart is an online food ordering app.This app was built using GetX architecture.This app is integrated with Google Maps API to provide location based service and it also includes PayPal payment gateway 
 
 <img src="https://user-images.githubusercontent.com/63713194/169001580-c5191209-b4ed-4274-b095-a9ed1578b407.jpg" width=250 height=500>
 <img src="https://user-images.githubusercontent.com/63713194/169001516-553a0224-1dfd-48aa-869d-084cfd6bdd7c.jpg" width=250 height=500>
