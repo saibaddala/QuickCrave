@@ -132,6 +132,7 @@ class SignUpScreen extends StatelessWidget {
                                     .registerUser(signUpDetailsModelFromUi);
 
                             if (signUpResponseFromServer.isSuccess) {
+                              Get.toNamed(RouteHelper.getSignInScreen());
                             } else {
                               showCustomSnackBar(
                                   message: signUpResponseFromServer.message);

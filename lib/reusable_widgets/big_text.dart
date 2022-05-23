@@ -13,7 +13,7 @@ class BigText extends StatelessWidget {
     Key? key,
     required this.text,
     this.textColor = AppColors.mainBlackColor,
-    this.textSize = 25,
+    this.textSize = 20,
     this.textOverflow = TextOverflow.ellipsis,
     this.wantOverflow = false,
   }) : super(key: key);
@@ -24,7 +24,7 @@ class BigText extends StatelessWidget {
       text,
       style: GoogleFonts.roboto(
         color: textColor,
-        fontSize: textSize == 25 ? Dimensions.fontSize20 : textSize,
+        fontSize: textSize == 20 ? Dimensions.fontSize20 : textSize,
       ),
       overflow: wantOverflow ? textOverflow : null,
     );

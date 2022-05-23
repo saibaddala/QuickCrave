@@ -62,8 +62,6 @@ class RouteHelper {
     return "$recommendedFoodRoute?listItemId=$listItemIndex&page=$page";
   }
 
-
-
   static List<GetPage> getPages() {
     return [
       GetPage(
@@ -79,23 +77,29 @@ class RouteHelper {
           page: () => const HomeScreen(),
           transition: Transition.fadeIn),
       GetPage(
-          name: popularFoodRoute,
-          page: () {
-            var pageIndex = Get.parameters["pageId"];
-            var page = Get.parameters["page"];
-            return PopularFoodDetailScreen(
-                pageIndex: int.parse(pageIndex!), page: page!);
-          },
-          transition: Transition.fadeIn),
+        name: popularFoodRoute,
+        page: () {
+          var pageIndex = Get.parameters["pageId"];
+          var page = Get.parameters["page"];
+          return PopularFoodDetailScreen(
+            pageIndex: int.parse(pageIndex!),
+            page: page!,
+          );
+        },
+        transition: Transition.fadeIn,
+      ),
       GetPage(
-          name: recommendedFoodRoute,
-          page: () {
-            var listItemId = Get.parameters["listItemId"];
-            var page = Get.parameters["page"];
-            return RecommendedFoodDetailScreen(
-                listItemIndex: int.parse(listItemId!), page: page!);
-          },
-          transition: Transition.fadeIn),
+        name: recommendedFoodRoute,
+        page: () {
+          var listItemId = Get.parameters["listItemId"];
+          var page = Get.parameters["page"];
+          return RecommendedFoodDetailScreen(
+            listItemIndex: int.parse(listItemId!),
+            page: page!,
+          );
+        },
+        transition: Transition.fadeIn,
+      ),
       GetPage(
           name: cartPageRoute,
           page: () => const CartPage(),

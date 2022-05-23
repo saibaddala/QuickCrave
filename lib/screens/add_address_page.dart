@@ -11,7 +11,6 @@ import 'package:foodart/utilities/colors.dart';
 import 'package:foodart/utilities/route_helper.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import '../utilities/dimensions.dart';
 
 class AddAddressPage extends StatefulWidget {
@@ -64,8 +63,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<UserController>(
-      builder: ((userController) /*userController.userModel != null &&*/
-          {
+      builder: ((userController) {
         if (contactPersonNameController.text.isEmpty) {
           contactPersonNameController.text = userController.userModel.name;
           contactPersonNumberController.text = userController.userModel.phone;
@@ -140,40 +138,45 @@ class _AddAddressPageState extends State<AddAddressPage> {
                   SizedBox(
                     height: Dimensions.height50,
                     child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: locationController.addressTypeList.length,
-                        itemBuilder: ((context, index) {
-                          return InkWell(
-                            onTap: () {
-                              locationController.setAddressType(index);
-                            },
-                            child: Container(
-                              width: Dimensions.width50,
-                              margin: EdgeInsets.only(left: Dimensions.width15),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      Dimensions.radius15),
-                                  color: Theme.of(context).cardColor,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey[500]!,
-                                        blurRadius: 5,
-                                        spreadRadius: 1)
-                                  ]),
-                              child: Icon(
-                                index == 0
-                                    ? Icons.home_filled
-                                    : index == 1
-                                        ? Icons.work
-                                        : Icons.location_on,
-                                color:
-                                    locationController.addressTypeIndex == index
-                                        ? AppColors.mainColor
-                                        : Theme.of(context).disabledColor,
-                              ),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: locationController.addressTypeList.length,
+                      itemBuilder: ((context, index) {
+                        return InkWell(
+                          onTap: () {
+                            locationController.setAddressType(index);
+                          },
+                          child: Container(
+                            width: Dimensions.width50,
+                            margin: EdgeInsets.only(
+                              left: Dimensions.width15,
                             ),
-                          );
-                        })),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  Dimensions.radius15,
+                                ),
+                                color: Theme.of(context).cardColor,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey[500]!,
+                                    blurRadius: 5,
+                                    spreadRadius: 1,
+                                  )
+                                ]),
+                            child: Icon(
+                              index == 0
+                                  ? Icons.home_filled
+                                  : index == 1
+                                      ? Icons.work
+                                      : Icons.location_on,
+                              color:
+                                  locationController.addressTypeIndex == index
+                                      ? AppColors.mainColor
+                                      : Theme.of(context).disabledColor,
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
                   ),
                   SizedBox(
                     height: Dimensions.height10,
@@ -197,15 +200,17 @@ class _AddAddressPageState extends State<AddAddressPage> {
                               height: Dimensions.height15,
                             ),
                             CustomTextFieldWidget(
-                                textController: addressController,
-                                hintText: "Address",
-                                iconData: Icons.location_city),
+                              textController: addressController,
+                              hintText: "Address",
+                              iconData: Icons.location_city,
+                            ),
                             SizedBox(
                               height: Dimensions.height15,
                             ),
                             Padding(
-                              padding:
-                                  EdgeInsets.only(left: Dimensions.width15),
+                              padding: EdgeInsets.only(
+                                left: Dimensions.width15,
+                              ),
                               child: const BigText(
                                 text: "Name",
                                 textColor: AppColors.mainBlackColor,
@@ -215,15 +220,17 @@ class _AddAddressPageState extends State<AddAddressPage> {
                               height: Dimensions.height15,
                             ),
                             CustomTextFieldWidget(
-                                textController: contactPersonNameController,
-                                hintText: "Name",
-                                iconData: Icons.person),
+                              textController: contactPersonNameController,
+                              hintText: "Name",
+                              iconData: Icons.person,
+                            ),
                             SizedBox(
                               height: Dimensions.height15,
                             ),
                             Padding(
-                              padding:
-                                  EdgeInsets.only(left: Dimensions.width15),
+                              padding: EdgeInsets.only(
+                                left: Dimensions.width15,
+                              ),
                               child: const BigText(
                                 text: "Mobile Number",
                                 textColor: AppColors.mainBlackColor,
@@ -233,9 +240,10 @@ class _AddAddressPageState extends State<AddAddressPage> {
                               height: Dimensions.height15,
                             ),
                             CustomTextFieldWidget(
-                                textController: contactPersonNumberController,
-                                hintText: "Mobile",
-                                iconData: Icons.phone),
+                              textController: contactPersonNumberController,
+                              hintText: "Mobile",
+                              iconData: Icons.phone,
+                            ),
                             SizedBox(
                               height: Dimensions.height25,
                             ),

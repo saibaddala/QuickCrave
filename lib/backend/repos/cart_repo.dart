@@ -70,5 +70,6 @@ class CartRepo {
   void clearAllUserCartDataStoredLocally() {
     removeNotCheckedOutCartList();
     sharedPreferences.remove(AppConstants.cartHistoryList);
+    cartHistoryList = [];
   }
 }

@@ -1,7 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:foodart/backend/app_constants.dart';
-import 'package:foodart/backend/controllers/cart_managing_controller.dart';
 import 'package:foodart/backend/controllers/popular_product_controller.dart';
 import 'package:foodart/backend/models/product_model.dart';
 import 'package:foodart/backend/controllers/recommended_product_controller.dart';
@@ -71,6 +70,7 @@ class _HomeScreenItemsBuilderState extends State<HomeScreenItemsBuilder> {
                   ),
                 );
         }),
+        
         GetBuilder<PopularProductController>(
             builder: (popularproductcontroller) {
           return DotsIndicator(

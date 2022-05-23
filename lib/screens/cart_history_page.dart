@@ -59,7 +59,9 @@ class CartHistoryPage extends StatelessWidget {
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Get.toNamed(RouteHelper.getCartPage());
+        },
         child: Container(
           height: Dimensions.height50,
           width: Dimensions.width50,
@@ -101,10 +103,11 @@ class CartHistoryPage extends StatelessWidget {
                   ? Expanded(
                       child: Container(
                         margin: EdgeInsets.only(
-                            left: Dimensions.width25,
-                            right: Dimensions.width25,
-                            top: Dimensions.height5,
-                            bottom: Dimensions.height10),
+                          left: Dimensions.width25,
+                          right: Dimensions.width25,
+                          top: Dimensions.height5,
+                          bottom: Dimensions.height10,
+                        ),
                         child: ListView(
                           children: [
                             for (int i = 0;
@@ -117,6 +120,9 @@ class CartHistoryPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     timeWidget(k),
+                                    SizedBox(
+                                      height: Dimensions.height10,
+                                    ),
                                     Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -124,11 +130,11 @@ class CartHistoryPage extends StatelessWidget {
                                           Wrap(
                                             direction: Axis.horizontal,
                                             children: List.generate(
-                                                orderedItemsCount[k] > 3
-                                                    ? 3
-                                                    : orderedItemsCount[k],
-                                                (index) {
-                                              return Container(
+                                              orderedItemsCount[k] > 3
+                                                  ? 3
+                                                  : orderedItemsCount[k],
+                                              (index) {
+                                                return Container(
                                                   margin: EdgeInsets.only(
                                                       top: Dimensions.height5,
                                                       right: Dimensions.width5,
@@ -142,17 +148,20 @@ class CartHistoryPage extends StatelessWidget {
                                                             Dimensions
                                                                 .radius10),
                                                     image: DecorationImage(
-                                                        image: NetworkImage(
+                                                      image: NetworkImage(
+                                                        AppConstants.baseUrl +
                                                             AppConstants
-                                                                    .baseUrl +
-                                                                AppConstants
-                                                                    .uploadUrl +
-                                                                cartItemsHistory[
-                                                                        x++]
-                                                                    .img!),
-                                                        fit: BoxFit.cover),
-                                                  ));
-                                            }),
+                                                                .uploadUrl +
+                                                            cartItemsHistory[
+                                                                    x++]
+                                                                .img!,
+                                                      ),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ),
                                           ),
                                           (() {
                                             if (orderedItemsCount[k] > 3) {

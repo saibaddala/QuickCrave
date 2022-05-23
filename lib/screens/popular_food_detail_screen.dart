@@ -58,9 +58,11 @@ class PopularFoodDetailScreen extends StatelessWidget {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius20)),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(
+                        Dimensions.radius20,
+                      ),
+                    ),
                     height: Dimensions.height30,
                     width: Dimensions.width30,
                     child: Icon(
@@ -79,9 +81,11 @@ class PopularFoodDetailScreen extends StatelessWidget {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                                color: const Color(0xFFfcf4e4),
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.radius20)),
+                              color: const Color(0xFFfcf4e4),
+                              borderRadius: BorderRadius.circular(
+                                Dimensions.radius20,
+                              ),
+                            ),
                             height: Dimensions.height30,
                             width: Dimensions.width30,
                             child: Icon(
@@ -97,15 +101,18 @@ class PopularFoodDetailScreen extends StatelessWidget {
                                     height: Dimensions.height15,
                                     width: Dimensions.width15,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            Dimensions.radius10),
-                                        color: AppColors.mainColor),
+                                      borderRadius: BorderRadius.circular(
+                                        Dimensions.radius10,
+                                      ),
+                                      color: AppColors.mainColor,
+                                    ),
                                     child: Center(
                                       child: Text(
                                         popularController.totalItems.toString(),
                                         style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: Dimensions.fontSize10),
+                                          color: Colors.white,
+                                          fontSize: Dimensions.fontSize10,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -127,7 +134,9 @@ class PopularFoodDetailScreen extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(Dimensions.radius20),
+                borderRadius: BorderRadius.circular(
+                  Dimensions.radius20,
+                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,9 +146,10 @@ class PopularFoodDetailScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                        left: Dimensions.width15,
-                        top: Dimensions.height30,
-                        bottom: Dimensions.height10),
+                      left: Dimensions.width15,
+                      top: Dimensions.height30,
+                      bottom: Dimensions.height10,
+                    ),
                     child: const BigText(text: "Introduce"),
                   ),
                   Expanded(
@@ -157,10 +167,14 @@ class PopularFoodDetailScreen extends StatelessWidget {
       ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.only(
-            left: Dimensions.width25, right: Dimensions.width25),
+          left: Dimensions.width25,
+          right: Dimensions.width25,
+        ),
         height: Dimensions.height100,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(Dimensions.radius20),
+          borderRadius: BorderRadius.circular(
+            Dimensions.radius20,
+          ),
           color: AppColors.buttonBackgroundColor,
         ),
         child: Row(
@@ -171,7 +185,9 @@ class PopularFoodDetailScreen extends StatelessWidget {
                 height: Dimensions.height50,
                 width: Dimensions.width100,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.radius15),
+                  borderRadius: BorderRadius.circular(
+                    Dimensions.radius15,
+                  ),
                   color: Colors.white,
                 ),
                 child: Row(
@@ -186,7 +202,9 @@ class PopularFoodDetailScreen extends StatelessWidget {
                           color: AppColors.signColor,
                         ),
                       ),
-                      BigText(text: controller.total.toString()),
+                      BigText(
+                        text: controller.total.toString(),
+                      ),
                       GestureDetector(
                         onTap: (() {
                           controller.setQuantity(true);

@@ -13,7 +13,6 @@ import 'package:foodart/backend/repos/recommended_product_repo.dart';
 import 'package:foodart/backend/repos/user_repo.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'controllers/location_controller.dart';
 import 'controllers/user_controller.dart';
 
@@ -32,6 +31,7 @@ Future<void> loadDependencies() async {
   Get.lazyPut(() => UserRepo(apiClient: Get.find()));
   Get.lazyPut(() => LocationRepo(
       apiClient: Get.find(), sharedPreferences: sharedPreferences));
+
 
   Get.lazyPut(() => PopularProductController(popularProductRepo: Get.find()));
   Get.lazyPut(

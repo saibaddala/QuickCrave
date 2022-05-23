@@ -139,10 +139,11 @@ class AccountScreen extends StatelessWidget {
                                             }
                                           },
                                           child: const AccountDetailRowWidget(
-                                              icon: Icons.logout,
-                                              fieldText: "Logout",
-                                              containerbackgroundColor:
-                                                  Colors.redAccent),
+                                            icon: Icons.logout,
+                                            fieldText: "Logout",
+                                            containerbackgroundColor:
+                                                Colors.redAccent,
+                                          ),
                                         ),
                                       ],
                                     ),

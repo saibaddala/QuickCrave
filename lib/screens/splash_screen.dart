@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen>
   late AnimationController controller;
 
   Future<void> _loadResources() async {
-    await Get.find<PopularProductController>().getPopularProductList();
+    await Get.find<PopularProductController>().fetchPopularProductList();
     await Get.find<RecommendedProductController>()
         .fetchRecommendedProductList();
   }
@@ -49,23 +49,26 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        ScaleTransition(
-          scale: animation,
-          child: Center(
-            child: Image.asset(
-              "assets/images/logo part 1.png",
-              width: Dimensions.width250,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ScaleTransition(
+            scale: animation,
+            child: Center(
+              child: Image.asset(
+                "assets/images/logo part 1.png",
+                width: Dimensions.width250,
+              ),
             ),
           ),
-        ),
-        Center(
-          child: Image.asset(
-            "assets/images/logo part 2.png",
-            width: Dimensions.width250,
-          ),
-        )
-      ]),
+          Center(
+            child: Image.asset(
+              "assets/images/logo part 2.png",
+              width: Dimensions.width250,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
